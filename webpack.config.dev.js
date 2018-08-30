@@ -1,5 +1,6 @@
 var webpack = require("webpack");
 var path = require("path");
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   devtool: "eval",
@@ -28,7 +29,14 @@ module.exports = {
         'THREE': 'three'
     }),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new CopyWebpackPlugin([
+        {from:'src/assets/webgl/geo',to:'assets/webgl/geo'},
+        {from:'src/assets/webgl/textures',to:'assets/webgl/textures'},
+        {from:'src/assets/webgl/textures/cube',to:'assets/webgl/textures/cube'}, 
+        {from:'src/assets/webgl/textures/cube/pisa',to:'assets/webgl/textures/cube/pisa'}, 
+        {from:'src/assets/webgl/textures/cube/pisaHDR',to:'assets/webgl/textures/cube/pisaHDR'}  
+    ]), 
   ],
   module: {
     rules: [

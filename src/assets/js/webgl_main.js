@@ -67,8 +67,8 @@
         var canvasHeight = container.offsetHeight;
         renderer.setSize( canvasWidth, canvasHeight);
 
-        container.appendChild( renderer.domElement );
 
+        container.appendChild( renderer.domElement );
 
         // reposition gui to top left of the webgl element 
         var gui = $( ".dg.ac" );
@@ -101,13 +101,7 @@
 
         // var backLight = new THREE.PointLight(0xffffff, 3, 0);
         // pointLight.position.set(0,0,-5);
-
         scene.add(pointLight);
-        //scene.add(backLight);
-
-
-
-        //
 
         new THREE.CubeTextureLoader()
             .setPath( './assets/webgl/textures/cube/pisa/' )
@@ -119,11 +113,11 @@
 
         //
 
-        material = new THREE.MeshStandardMaterial();
+        var material = new THREE.MeshStandardMaterial();
 
         new THREE.OBJLoader()
             .setPath( './assets/webgl/geo/' )
-            .load( 'plane.obj', function ( group ) {
+            .load( 'plane.geo', function ( group ) {
 
                 var loader = new THREE.TextureLoader()
                     .setPath( './assets/webgl/textures/demo_textures/' );
@@ -195,6 +189,8 @@
             container.appendChild( stats.dom );
 
         }
+
+        setTimeout(onWindowResize, 100);
 
         window.addEventListener( 'resize', onWindowResize, false );
 

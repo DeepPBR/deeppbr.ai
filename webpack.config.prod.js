@@ -91,7 +91,25 @@ module.exports = {
         }
       },
       {
-        test: /\.ico$/,
+        test: /\.(png|jpe?g|gif|ico)$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "assets/img/[name].[ext]"
+          }
+        }
+      },
+      {
+        test: /\.(geo)$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "assets/webgl/geo/[name].[ext]"
+          }
+        }
+      },
+      {
+        test: /\.(ico|hdr)$/,
         loader: "file?name=[name].[ext]"
       },
       {

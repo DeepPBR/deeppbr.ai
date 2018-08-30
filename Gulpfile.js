@@ -157,9 +157,9 @@ gulp.task("watch", function() {
     ["templates"],
     reload
   );
-  // gulp.watch('./src/assets/css/**/*.scss', ['webpack']);
+  gulp.watch('./src/assets/css/**/*.scss', ['webpack']);
   gulp.watch("./src/assets/img/**/*", ["images"], reload);
-  // gulp.watch(['./src/assets/js/**/*.js', './src/index.js', 'Gulpfile.js'], ['webpack']);
+  gulp.watch(['./src/assets/js/**/*.js', './src/index.js', 'Gulpfile.js'], ['webpack']);
 });
 
 gulp.task("build", function(cb) {
