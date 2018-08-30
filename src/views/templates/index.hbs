@@ -1,0 +1,211 @@
+{{#extend "base"}}
+{{#content "main" mode="prepend"}}
+<body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Deep Physics Based Rendering</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#how">How it works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="masthead">
+      <div class="container d-flex h-100 align-items-center">
+        <div class="mx-auto text-center">
+          <h1 class="mx-auto my-0 text-uppercase">Deep Physics Rendering</h1>
+          <h2 class="text-white-50 mx-auto mt-2 mb-5">A revolutionary new model for DPR pipelines.</h2>
+          <a href="#about" class="btn btn-primary js-scroll-trigger">Find out more</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-white mb-4">Built by 3d rendering experts for rendering experts</h2>
+            <p class="text-white-50">Deep Based Physics Rendering (DeepPBR) generates Normal, Roughness and De-Lit image maps using all using AI.</p>
+            <p class="text-white-50">If you're needing to generate texture maps - look no further than this one step method that does them all.  Our system is built trained on comparing millions of images to create a network so smart, that it can calculte your image maps with much less informaiton that would be needed using tradtional methods, with an accuracy very close to the real thing.  DeepPBR is quick, robust and affordable.  Just upload your model's materials, and in no time, you'll be working with your own Normals, Roughness and De-Lit image maps in no time.</p>
+          </div>
+        </div>
+        <p class="text-white-50"><a href="#how" class="js-scroll-trigger">But how does it work??</a></p>
+        <p class="text-white-50">Deep Based Physics Rendering (DeepPBR) uses AI to generate your PBR image maps through deep learning.  DeepPBR Engine has learnt about so many other image textures, that it makes an educated guess as to how new textures should work. Try it yourself below.</p>
+        <img src="assets/img/dbrEngine.png" class="img-fluid" alt="">
+      </div>
+    </section>
+
+    <!-- How it works Section -->
+    <section id="how" class="projects-section bg-light">
+      <div class="container">
+
+        <h2> How it works </h2>
+
+        <!-- Featured Project Row -->
+        <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+            <p>We start with this:
+                <br/>
+             <img src="assets/img/src_image.png" width="712" height="712">
+            </p>
+        </div>
+        <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+            <p>And then generate three images like this:
+                <br/>
+             <img src="assets/img/src_image.png" width="256" height="256">
+             <img src="assets/img/src_image.png" width="256" height="256">
+             <img src="assets/img/src_image.png" width="256" height="256">
+
+            </p>
+        </div>
+        <div class="row mb-4 mb-lg-5">
+            <p class="clearfix">And then it looks like this:</p>
+        </div>
+        <div  class="row mb-4 mb-lg-5">
+            <div id="webgl_container" ></div>
+        </div>
+
+      
+        <h3>Some More Examples</h3>
+
+        <!-- Project One Row -->
+        <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+          <div class="col-lg-6">
+            <img class="img-fluid" src="assets/img/demo-image-01.jpg" alt="">
+          </div>
+          <div class="col-lg-6">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-left">
+                  <h4 class="text-white">Misty</h4>
+                  <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
+                  <hr class="d-none d-lg-block mb-0 ml-0">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Two Row -->
+        <div class="row justify-content-center no-gutters">
+          <div class="col-lg-6">
+            <img class="img-fluid" src="assets/img/demo-image-02.jpg" alt="">
+          </div>
+          <div class="col-lg-6 order-lg-first">
+            <div class="bg-black text-center h-100 project">
+              <div class="d-flex h-100">
+                <div class="project-text w-100 my-auto text-center text-lg-right">
+                  <h4 class="text-white">Mountains</h4>
+                  <p class="mb-0 text-white-50">Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!</p>
+                  <hr class="d-none d-lg-block mb-0 mr-0">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Signup Section -->
+   <!--  <section id="signup" class="signup-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-lg-8 mx-auto text-center">
+
+            <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+            <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
+
+            <form class="form-inline d-flex">
+              <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address...">
+              <button type="submit" class="btn btn-primary mx-auto">Subscribe</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Contact Section -->
+    <section  id="contact" class="contact-section bg-black">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card py-4 h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-map-marked-alt text-primary mb-2"></i>
+                <h4 class="text-uppercase m-0">Address</h4>
+                <hr class="my-4">
+                <div class="small text-black-50">4-74 Upper Queen St, Auckland CBD, New Zealand</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card py-4 h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-envelope text-primary mb-2"></i>
+                <h4 class="text-uppercase m-0">Email</h4>
+                <hr class="my-4">
+                <div class="small text-black-50">
+                  <a href="#">info@realityvirtual.co</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card py-4 h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-mobile-alt text-primary mb-2"></i>
+                <h4 class="text-uppercase m-0">Phone</h4>
+                <hr class="my-4">
+                <div class="small text-black-50">+64 21-1490191</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       <!--  <div class="social d-flex justify-content-center">
+          <a href="#" class="mx-2">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="mx-2">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="mx-2">
+            <i class="fab fa-github"></i>
+          </a>
+        </div> -->
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black small text-center text-white-50">
+      <div class="container">
+        Copyright &copy; <a href="http://realityvirtual.co">Reality Virtual</a> 2018
+      </div>
+    </footer>
+
+{{/content}}
+{{/extend}}

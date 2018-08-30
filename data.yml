@@ -1,0 +1,11 @@
+meta:
+  title: "Deep Physics Rendering"
+  description: "Deep Physics Rendering using Deep Learning to create normals, diffuse / delit and roughness maps."
+  facebook_image: ""  # /img/facebook.png
+  twitter_image: ""  # /img/twitter.png
+  image: ""  # /img/share.png
+  twitter_handle: ""  # @rakshans1
+  domain: ""  #  rakshanshetty.in
+  url: ""  #     http://rakshanshetty.in
+  google_analytics_id: "" # UA-66637918-1
+  theme_color: "" # #FFFFFF
