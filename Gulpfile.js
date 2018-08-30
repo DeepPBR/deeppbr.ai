@@ -216,3 +216,42 @@ gulp.task("serve", ["build"], function() {
   // all browsers reload after tasks are complete.
   gulp.start(["watch"]);
 });
+
+
+// use default task to launch Browsersync and watch JS files
+gulp.task("servedocs", ["build"], function() {
+  // Serve files from the root of this project
+  browserSync.init(["./docs/**/*"], {
+    port: process.env.port || 3000,
+    server: {
+      baseDir: "docs",
+      middleware: [
+        // historyApiFallback(),
+        hygienist("dist"),
+        webpackDevMiddleware(bundler, {
+          // Dev middleware can't access config, so we provide publicPath
+          publicPath: config.output.publicPath,
+
+          // These settings suppress noisy webpack output so only errors are displayed to the console.
+          noInfo: false,
+          quiet: true, //was false changed for webpack-dashboard
+          stats: {
+            assets: false,
+            colors: true,
+            version: false,
+            hash: false,
+            timings: false,
+            chunks: false,
+            chunkModules: false
+          }
+
+          // for other settings see
+          // http://webpack.github.io/docs/webpack-dev-middleware.html
+        }),
+        webpackHotMiddleware(bundler, {
+          log: () => {}
+        })
+      ]
+    }
+  });
+});
