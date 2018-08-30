@@ -1,4 +1,10 @@
 {
+  "_args": [
+    [
+      "@fortawesome/fontawesome-free@5.2.0",
+      "/Users/dmonaghan/Desktop/dbr"
+    ]
+  ],
   "_from": "@fortawesome/fontawesome-free@5.2.0",
   "_id": "@fortawesome/fontawesome-free@5.2.0",
   "_inBundle": false,
@@ -20,9 +26,8 @@
     "/"
   ],
   "_resolved": "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-5.2.0.tgz",
-  "_shasum": "50cd9856774351c56c0b1b0db4efe122d7913e58",
-  "_spec": "@fortawesome/fontawesome-free@5.2.0",
-  "_where": "/Users/DANGER_DAVID/Sites/startbootstrap-themes/startbootstrap-grayscale",
+  "_spec": "5.2.0",
+  "_where": "/Users/dmonaghan/Desktop/dbr",
   "author": {
     "name": "Dave Gandy",
     "email": "dave@fontawesome.com",
@@ -31,7 +36,6 @@
   "bugs": {
     "url": "http://github.com/FortAwesome/Font-Awesome/issues"
   },
-  "bundleDependencies": false,
   "contributors": [
     {
       "name": "Brian Talbot",
@@ -55,7 +59,6 @@
     }
   ],
   "dependencies": {},
-  "deprecated": false,
   "description": "The iconic font, CSS, and SVG framework",
   "engines": {
     "node": ">=6"
