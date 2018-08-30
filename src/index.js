@@ -16,7 +16,7 @@ import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/js/grayscale.js";
 
 // webgl includes needed
-import "./assets/webgl/js/three.js"
+import "three"
 
 import "./assets/webgl/js/controls/OrbitControls.js"
 import "./assets/webgl/js/loaders/OBJLoader.js"

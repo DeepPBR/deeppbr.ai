@@ -1,4 +1,5 @@
-if (!Detector.webgl ) Detector.addGetWebGLMessage();
+//if (!Detector.webgl ) Detector.addGetWebGLMessage();
+    var THREE = require('three');
 
     var statsEnabled = false;
 
@@ -25,7 +26,7 @@ if (!Detector.webgl ) Detector.addGetWebGLMessage();
 
 
 
-    initGui();
+    //initGui();
     init();
     animate();
     
@@ -109,7 +110,7 @@ if (!Detector.webgl ) Detector.addGetWebGLMessage();
         //
 
         new THREE.CubeTextureLoader()
-            .setPath( 'webgl/textures/cube/pisa/' )
+            .setPath( './assets/webgl/textures/cube/pisa/' )
             .load( [ 'px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png' ], function ( textureCube ) {
 
                 scene.background = textureCube;
@@ -121,11 +122,11 @@ if (!Detector.webgl ) Detector.addGetWebGLMessage();
         material = new THREE.MeshStandardMaterial();
 
         new THREE.OBJLoader()
-            .setPath( 'webgl/geo/' )
+            .setPath( './assets/webgl/geo/' )
             .load( 'plane.obj', function ( group ) {
 
                 var loader = new THREE.TextureLoader()
-                    .setPath( 'webgl/textures/demo_textures/' );
+                    .setPath( './assets/webgl/textures/demo_textures/' );
 
                 material.roughness = 0.75; // attenuates roughnessMap
                 material.metalness = 1.0; // attenuates metalnessMap
@@ -166,7 +167,7 @@ if (!Detector.webgl ) Detector.addGetWebGLMessage();
             ];
         };
 
-        var hdrUrls = genCubeUrls( 'webgl/textures/cube/pisaHDR/', '.hdr' );
+        var hdrUrls = genCubeUrls( './assets/webgl/textures/cube/pisaHDR/', '.hdr' );
         new THREE.HDRCubeTextureLoader().load( THREE.UnsignedByteType, hdrUrls, function ( hdrCubeMap ) {
 
             var pmremGenerator = new THREE.PMREMGenerator( hdrCubeMap );
