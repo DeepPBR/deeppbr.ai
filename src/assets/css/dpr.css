@@ -1,0 +1,11 @@
+#webgl_container {
+    clear:left;
+    background: red;
+    width: 100%;
+    height: 400px;
+}
+
+#webgl_container .dg.ac {
+    position:relative;
+    z-index: 100;
+}

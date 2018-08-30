@@ -24,6 +24,9 @@ module.exports = {
       jQuery: "jquery",
       Tether: "tether"
     }),
+    new webpack.ProvidePlugin({
+        'THREE': 'three'
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
