@@ -78,6 +78,53 @@ Runs `gulp watch` in the background, and serves the `dist` directory at `localho
 [scss]: http://sass-lang.com/
 [webpack]: https://webpack.js.org/
 
+
+# Deploying to GitHub Pages
+
+Running in dev is different from deploying to build.
+
+To deploy to the site we build first to the 'dist' directory.
+
+We end up with a subdirectory on the `master` branch that needs to be the root directory of a `gh-pages` branch at github. 
+
+So, to deploy:
+
+### Step 1
+
+First build to dist directory:
+
+```
+gulp build
+```
+
+### Step 2
+
+Use subtree push to send it to the `gh-pages` branch on GitHub.
+
+```sh
+git subtree push --prefix dist origin gh-pages
+```
+
+---
+
+If we do this on a regular basis, you could also [create a script](https://github.com/cobyism/dotfiles/blob/master/bin/git-gh-deploy) containing the following somewhere in your path:
+
+```sh
+#!/bin/sh
+if [ -z "$1" ]
+then
+  echo "Which folder do you want to deploy to GitHub Pages?"
+  exit 1
+fi
+git subtree push --prefix $1 origin gh-pages
+```
+
+Which lets you type commands like:
+
+```sh
+git gh-deploy path/to/your/site
+```
+
 ## Copyright and License
 
 All content and code here is Copyright 2018 RealityVirtual Ltd, NZ. 
