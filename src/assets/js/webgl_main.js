@@ -1,5 +1,6 @@
 //if (!Detector.webgl ) Detector.addGetWebGLMessage();
-    var THREE = require('three');
+    const THREE = require('three');
+    const dat = require('dat.gui');
 
     var statsEnabled = false;
 
@@ -14,19 +15,20 @@
     //var lampBright;
 
     var settings = {
-        metalness: 0.0,
-        roughness: 0.4,
-        lampIntensity: 3,
+        metalness: 1.0,
+        roughness: 1.3,
+        lampIntensity: 0.9,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
-        displacementScale: 2.436143, // from original model
-        normalScale: 1.0
+        displacementScale: 2.0, // 2.436143, // from original model
+        normalScale: 2.0,
+        diffuse_map: "wall5_lit-delit.png",
+        roughness_map: "wall5_lit-roughness.png",
+        normal_map: "wall5_lit-normals.png"
     };
 
-
-
-
-    //initGui();
+    var material = new THREE.MeshStandardMaterial();
+    initGui();
     init();
     animate();
     
@@ -52,7 +54,7 @@
         // gui.add( settings, "displacementScale" ).min( 0 ).max( 3.0 ).onChange( function( value ) {
         //  material.displacementScale = value;
         // } );
-        gui.add( settings, "normalScale" ).min( - 1 ).max( 2 ).onChange( function( value ) {
+        gui.add( settings, "normalScale" ).min( -1 ).max( 3 ).onChange( function( value ) {
             material.normalScale.set( 1, -1 ).multiplyScalar( value );
         } );
     }
@@ -75,8 +77,6 @@
         gui.detach().appendTo($("#webgl_container"));
         gui.css("top", $("#webgl_container").css("top"));
 
-        
-
         renderer.gammaInput = true;
         renderer.gammaOutput = true;
 
@@ -84,13 +84,11 @@
         renderer.toneMappingExposure = 3;
 
         //
-
         scene = new THREE.Scene();
 
         camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.01, 1000 );
         camera.position.z = 2;
         camera.rotation.x = Math.PI / 0.5
-
         controls = new THREE.OrbitControls( camera, renderer.domElement );
 
         //
@@ -113,22 +111,21 @@
 
         //
 
-        var material = new THREE.MeshStandardMaterial();
-
         new THREE.OBJLoader()
             .setPath( './assets/webgl/geo/' )
             .load( 'plane.geo', function ( group ) {
 
                 var loader = new THREE.TextureLoader()
-                    .setPath( './assets/webgl/textures/demo_textures/' );
+                    .setPath( './assets/img/examples/' );
 
-                material.roughness = 0.75; // attenuates roughnessMap
-                material.metalness = 1.0; // attenuates metalnessMap
+                material.metalness = settings.metalness;
+                material.roughness = settings.roughness;
+                material.normalScale.set( 1, -1 ).multiplyScalar( settings.normalScale );
 
-                material.map = loader.load( 'ceil_4_diffuse.jpg' );
+                material.map = loader.load(settings.diffuse_map);
                 // roughness is in G channel, metalness is in B channel
-                material.metalnessMap = material.roughnessMap = loader.load( 'ceil_4_roughness.jpg' );
-                material.normalMap = loader.load( 'ceil_4_normals.jpg' );
+                material.metalnessMap = material.roughnessMap = loader.load(settings.roughness_map);
+                material.normalMap = loader.load(settings.normal_map);
 
                 material.map.wrapS = THREE.RepeatWrapping;
                 material.roughnessMap.wrapS = THREE.RepeatWrapping;
