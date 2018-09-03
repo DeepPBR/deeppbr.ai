@@ -69,11 +69,11 @@ gulp.task("webpack:optimized", function(callback) {
 
 gulp.task("css:optimized", function() {
   return gulp
-    .src("./dist/assets/css/*.css")
+    .src("./docs/assets/css/*.css")
     .pipe(plumber())
     .pipe(autoprefixer())
     .pipe(cssnano({ discardComments: { removeAll: true } }))
-    .pipe(gulp.dest("dist/assets/css/"));
+    .pipe(gulp.dest("docs/assets/css/"));
 });
 
 gulp.task("images", function() {
@@ -85,7 +85,7 @@ gulp.task("images", function() {
         progressive: true
       })
     )
-    .pipe(gulp.dest("./dist/assets/img"));
+    .pipe(gulp.dest("./docs/assets/img"));
 });
 
 gulp.task("images:optimized", function() {
@@ -98,11 +98,11 @@ gulp.task("images:optimized", function() {
         multipass: true
       })
     )
-    .pipe(gulp.dest("./dist/assets/img"));
+    .pipe(gulp.dest("./docs/assets/img"));
 });
 
 gulp.task("fonts", function() {
-  return gulp.src("src/font/*").pipe(plumber()).pipe(gulp.dest("./dist/font"));
+  return gulp.src("src/font/*").pipe(plumber()).pipe(gulp.dest("./docs/font"));
 });
 
 gulp.task("templates", function() {
@@ -126,12 +126,12 @@ gulp.task("templates", function() {
         path.extname = ".html";
       })
     )
-    .pipe(gulp.dest("dist"));
+    .pipe(gulp.dest("docs"));
 });
 
 gulp.task("templates:optimized", ["templates"], function() {
   return gulp
-    .src("./dist/**/*.html")
+    .src("./docs/**/*.html")
     .pipe(inlinesource())
     .pipe(replace(/\.\.\//g, ""))
     .pipe(
@@ -140,11 +140,11 @@ gulp.task("templates:optimized", ["templates"], function() {
         removeComments: true
       })
     )
-    .pipe(gulp.dest("./dist/"));
+    .pipe(gulp.dest("./docs/"));
 });
 
 gulp.task("clean", function(cb) {
-  return rimraf("./dist/", cb);
+  return rimraf("./docs/", cb);
 });
 
 gulp.task("watch", function() {
@@ -178,13 +178,13 @@ gulp.task("build:optimized", function(cb) {
 // use default task to launch Browsersync and watch JS files
 gulp.task("serve", ["build"], function() {
   // Serve files from the root of this project
-  browserSync.init(["./dist/**/*"], {
+  browserSync.init(["./docs/**/*"], {
     port: process.env.port || 3000,
     server: {
-      baseDir: "dist",
+      baseDir: "docs",
       middleware: [
         // historyApiFallback(),
-        hygienist("dist"),
+        hygienist("docs"),
         webpackDevMiddleware(bundler, {
           // Dev middleware can't access config, so we provide publicPath
           publicPath: config.output.publicPath,

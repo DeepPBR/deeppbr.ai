@@ -6,6 +6,9 @@ import "./assets/css/main.scss";
 // quick hacks in css 
 import "./assets/css/dpr.css";
 
+// images we need to be sure to include in deployed distribution
+import "./assets/img/bg-masthead.jpg";
+
 // js - libraries
 import "bootstrap"; //magic! i dunno
 import "../node_modules/tether/dist/js/tether.js";
