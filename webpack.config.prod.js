@@ -3,6 +3,7 @@ var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var WebpackMd5Hash = require("webpack-md5-hash");
 var Visualizer = require("webpack-visualizer-plugin");
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const GLOBALS = {
   "process.env.NODE_ENV": JSON.stringify("production"),
@@ -29,6 +30,16 @@ module.exports = {
       jQuery: "jquery",
       Tether: "tether"
     }),
+    new webpack.ProvidePlugin({
+        'THREE': 'three'
+    }),
+    new CopyWebpackPlugin([
+        {from:'src/assets/webgl/geo',to:'assets/webgl/geo'}
+        // {from:'src/assets/webgl/textures',to:'assets/webgl/textures'},
+        // {from:'src/assets/webgl/textures/cube',to:'assets/webgl/textures/cube'}, 
+        // {from:'src/assets/webgl/textures/cube/pisa',to:'assets/webgl/textures/cube/pisa'}, 
+        // {from:'src/assets/webgl/textures/cube/pisaHDR',to:'assets/webgl/textures/cube/pisaHDR'}  
+    ]), 
     new Visualizer(),
     new webpack.ContextReplacementPlugin(
       /highlight\.js\/lib\/languages$/,
