@@ -19,17 +19,20 @@
     var imageMapCurrent = 0
 
     var settings = {
-        metalness: 0.2,
+        metalness: 1.0,
         roughness: 1.3,
-        lampIntensity: 0.75,
+        lampIntensity: 0.9,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
         displacementScale: 2.0, // 2.436143, // from original model
-        normalScale: -0.7,
+        normalScale: 2.0,
         mapImage: 0,
         diffuse_map: "00_delit.jpg",
         roughness_map: "00_rough.jpg",
-        normal_map: "00_norms.jpg"
+        normal_map: "00_norms.jpg",
+        displacement_map: "00_disp.jpg",
+        displacementBias: 0.5,
+        displacementScale: 1.0
 
     };
 
@@ -71,6 +74,7 @@ function pad(n, width, z) {
         var dif = "_delit.jpg";
         var nrm = "_norms.jpg";
         var rog = "_rough.jpg";
+        //var dsp = "_disp.jpg";
         
         settings.diffuse_map   = formated.concat(dif);
         settings.normal_map    = formated.concat(nrm);
@@ -98,12 +102,17 @@ function pad(n, width, z) {
         // gui.add( settings, "ambientIntensity" ).min( 0 ).max( 1 ).onChange( function( value ) {
         //  ambientLight.intensity = value;
         // } );
-        // gui.add( settings, "envMapIntensity" ).min( 0 ).max( 3 ).onChange( function( value ) {
-        //  material.envMapIntensity = value;
-        // } );
-        // gui.add( settings, "displacementScale" ).min( 0 ).max( 3.0 ).onChange( function( value ) {
-        //  material.displacementScale = value;
-        // } );
+        gui.add( settings, "envMapIntensity" ).min( 0 ).max( 10 ).onChange( function( value ) {
+         material.envMapIntensity = value;
+        } );
+        gui.add( settings, "displacementScale" ).min( -3.0 ).max( 3.0 ).onChange( function( value ) {
+         material.displacementScale = value;
+        } );
+
+        gui.add( settings, "displacementBias" ).min( -3.0 ).max( 3.0 ).onChange( function( value ) {
+         material.displacementBias = value;
+        } );
+
         gui.add( settings, "normalScale" ).min( -4 ).max( 3 ).onChange( function( value ) {
             material.normalScale.set( 1, -1 ).multiplyScalar( value );
         } );
@@ -183,7 +192,7 @@ function pad(n, width, z) {
 
         new THREE.OBJLoader()
             .setPath( './assets/webgl/geo/' )
-            .load( 'plane.geo', function ( group ) {
+            .load( 'planeSubDiv.obj', function ( group ) {
 
                 var loader = new THREE.TextureLoader()
                     .setPath( './assets/img/examples/' );
@@ -196,6 +205,10 @@ function pad(n, width, z) {
                 // roughness is in G channel, metalness is in B channel
                 material.metalnessMap = material.roughnessMap = loader.load(settings.roughness_map); /// is this correct???
                 material.normalMap = loader.load(settings.normal_map);
+                material.displacementMap = loader.load(settings.displacement_map);
+                material.displacementScale = 1.0 ; // settings.displacementScale;
+                material.displacementBias = - 0.428408,
+
 
                 material.map.wrapS = THREE.RepeatWrapping;
                 material.roughnessMap.wrapS = THREE.RepeatWrapping;
@@ -213,7 +226,7 @@ function pad(n, width, z) {
 
                 } );
 
-                group.position.x = 0 ;
+                group.position.x = - 0.45;
                 group.rotation.y = 0 ; - Math.PI / 2;
                 group.rotation.x = Math.PI / 2; 
                 scene.add( group );
@@ -299,7 +312,7 @@ function onKeyDown( e ) {
 
         controls.update();
         renderer.render( scene, camera );
-                renderer.setClearColorHex( 0xffffff, 1 );
+                
         pointLight.position.x = camera.position.x;
         pointLight.position.y = camera.position.y;
         pointLight.position.z = camera.position.z;

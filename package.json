@@ -25,7 +25,8 @@
     "jquery.easing": "^1.4.1",
     "popper.js": "^1.14.4",
     "tether": "^1.4.4",
-    "three": "^0.95.0"
+    "three": "^0.95.0",
+    "three-text2d": "^0.4.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
