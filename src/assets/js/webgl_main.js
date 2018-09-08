@@ -299,7 +299,7 @@ function onKeyDown( e ) {
 
         controls.update();
         renderer.render( scene, camera );
-                renderer.setClearColorHex( 0xffffff, 1 );
+                renderer.setClearColor( 0xffffff, 1 );
         pointLight.position.x = camera.position.x;
         pointLight.position.y = camera.position.y;
         pointLight.position.z = camera.position.z;
