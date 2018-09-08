@@ -45,12 +45,6 @@ import "./assets/img/examples/08_delit.jpg";
 import "./assets/img/examples/08_norms.jpg";
 import "./assets/img/examples/08_rough.jpg";
 
-// we don't need to references these because 
-// they're refernced in the other js - which the 
-// webpack reads - but what the hey force them to 
-// be included anyway
-import "./assets/webgl/geo/plane.obj";
-import "./assets/webgl/geo/planeSubDiv.obj";
 
 
 
