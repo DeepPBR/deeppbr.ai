@@ -27,9 +27,9 @@ var settings = {
     displacementScale: 2.0, // 2.436143, // from original model
     normalScale: -0.7,
     mapImage: 0,
-    diffuse_map: "00_delit.jpg",
-    roughness_map: "00_rough.jpg",
-    normal_map: "00_norms.jpg"
+    diffuse_map: "07_delit.jpg",
+    roughness_map: "07_rough.jpg",
+    normal_map: "07_norms.jpg"
 
 };
 
@@ -66,38 +66,9 @@ function initGui() {
         pointLight.intensity = value;
     } );
 
-    gui.add( settings, 'mapImage', 0, 8 ).step( 1 )
-    .onChange( function( value )  {
-    
-        if (imageMapCurrent != value) {
-            console.log("DIFFERENT");
-            imageMapCurrent = value;
-
-
-            var formated = pad(value, 2);      // 0010
-            var dif = "_delit.jpg";
-            var nrm = "_norms.jpg";
-            var rog = "_rough.jpg";
-
-            settings.diffuse_map   = formated.concat(dif);
-            settings.normal_map    = formated.concat(nrm);
-            settings.roughness_map = formated.concat(rog);
-            var loader = new THREE.TextureLoader()
-                        .setPath( './assets/img/examples/');
-
-            materialSwap.map = loader.load(settings.diffuse_map);
-            // roughness is in G channel, metalness is in B channel
-            materialSwap.metalnessMap = material.roughnessMap = loader.load(settings.roughness_map); /// is this correct???
-            materialSwap.normalMap = loader.load(settings.normal_map);
-            material.map = materialSwap.map
-            material.roughnessMap = material.roughnessMap = materialSwap.roughnessMap
-            material.normalMap = materialSwap.normalMap
-
-            // console.log(formated.concat(dif));
-            // console.log(formated.concat(nrm));
-            // console.log(formated.concat(rog));
-        }
-    });
+   
+    // start with gui closed
+    gui.closed = true;
 
     // gui.add( settings, "ambientIntensity" ).min( 0 ).max( 1 ).onChange( function( value ) {
     //  ambientLight.intensity = value;
@@ -195,14 +166,6 @@ function init() {
 
         } );
 
-    var genCubeUrls = function( prefix, postfix ) {
-        return [
-            prefix + 'px' + postfix, prefix + 'nx' + postfix,
-            prefix + 'py' + postfix, prefix + 'ny' + postfix,
-            prefix + 'pz' + postfix, prefix + 'nz' + postfix
-        ];
-    };
-
 
     if ( statsEnabled ) {
 
@@ -214,7 +177,7 @@ function init() {
     setTimeout(onWindowResize, 100);
 
     window.addEventListener( 'resize', onWindowResize, false );
-    window.addEventListener( 'keydown', onKeyDown, true);
+    //window.addEventListener( 'keydown', onKeyDown, true);
 }
 
 //
@@ -232,36 +195,89 @@ function onWindowResize( event ) {
 
 }
 
-function onKeyDown( e ) {
-                var maps = [ 'rainbow', 'cooltowarm', 'blackbody', 'grayscale' ];
-                if ( e.keyCode === 65 ) {
-                   console
-                } else if ( e.keyCode === 83 ) {
-                   console
-                } else if ( e.keyCode === 68 ) {
-                   console
-                } else if ( e.keyCode === 70 ) {
-                  console
-                }
-            }
+function animate() {
 
-    //
+    requestAnimationFrame( animate );
 
-    function animate() {
+    controls.update();
+    renderer.render( scene, camera );
+    renderer.setClearColor( 0xB4B4B4, 1 );
+    pointLight.position.x = camera.position.x;
+    pointLight.position.y = camera.position.y;
+    pointLight.position.z = camera.position.z;
 
-        requestAnimationFrame( animate );
+    pointLight.rotation.x = camera.rotation.x;
+    pointLight.rotation.y = camera.rotation.y;
+    pointLight.rotation.z = camera.rotation.z;
 
-        controls.update();
-        renderer.render( scene, camera );
-                renderer.setClearColor( 0xB4B4B4, 1 );
-        pointLight.position.x = camera.position.x;
-        pointLight.position.y = camera.position.y;
-        pointLight.position.z = camera.position.z;
+    if ( statsEnabled ) stats.update();
 
-        pointLight.rotation.x = camera.rotation.x;
-        pointLight.rotation.y = camera.rotation.y;
-        pointLight.rotation.z = camera.rotation.z;
+}
 
-        if ( statsEnabled ) stats.update();
 
-    }
+function switch_source_image( src_id )  {
+    
+    console.log("switch_source_image: " + src_id);
+    
+    var formatted = pad(src_id, 2);      // 0010
+    var dif = "_delit.jpg";
+    var nrm = "_norms.jpg";
+    var rog = "_rough.jpg";
+
+    settings.diffuse_map   = formatted.concat(dif);
+    settings.normal_map    = formatted.concat(nrm);
+    settings.roughness_map = formatted.concat(rog);
+    var loader = new THREE.TextureLoader()
+                .setPath( './assets/img/examples/');
+
+    materialSwap.map = loader.load(settings.diffuse_map);
+    // roughness is in G channel, metalness is in B channel
+    materialSwap.metalnessMap = material.roughnessMap = loader.load(settings.roughness_map); /// is this correct???
+    materialSwap.normalMap = loader.load(settings.normal_map);
+    material.map = materialSwap.map
+    material.roughnessMap = material.roughnessMap = materialSwap.roughnessMap
+    material.normalMap = materialSwap.normalMap
+
+    // console.log(formated.concat(dif));
+    // console.log(formated.concat(nrm));
+    // console.log(formated.concat(rog));
+}
+
+module.exports = {
+  switch_source_image: function(src_id) {
+        switch_source_image(src_id);
+  }
+};
+
+// ideally we'd put this in app.js but stupid whatever doesnt work so whack it in here for now
+
+(function($) {
+    "use strict"; // Start of use strict
+    const regex = /(\d\d)_base/;
+
+    $(".select-source a").click(function(evt) {
+        var str = evt.target.src;
+        var match = str.match(regex)[1];
+        if (match) {
+            var src_id = parseInt(match);
+            switch_source_image(src_id);
+            var src = pad(src_id, 2);      // 01
+            $(".src_base img").attr("src", "assets/img/examples/" + src + "_base.jpg"); 
+            $(".src_base").attr("href", "assets/img/examples/" + src + "_base.jpg"); 
+
+            $(".src_norms img").attr("src", "assets/img/examples/" + src + "_norms.jpg"); 
+            $(".src_norms").attr("href", "assets/img/examples/" + src + "_norms.jpg"); 
+
+            $(".src_rough img").attr("src", "assets/img/examples/" + src + "_rough.jpg"); 
+            $(".src_rough").attr("href", "assets/img/examples/" + src + "_rough.jpg"); 
+
+            $(".src_delit img").attr("src", "assets/img/examples/" + src + "_delit.jpg"); 
+            $(".src_delit").attr("href", "assets/img/examples/" + src + "_delit.jpg"); 
+        }
+        
+    
+        evt.preventDefault();
+    })
+
+})(jQuery); // End of use strict
+

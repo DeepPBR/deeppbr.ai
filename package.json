@@ -23,6 +23,7 @@
     "dat.gui": "^0.7.2",
     "jquery": "3.3.1",
     "jquery.easing": "^1.4.1",
+    "lightbox2": "^2.10.0",
     "popper.js": "^1.14.4",
     "tether": "^1.4.4",
     "three": "^0.95.0",

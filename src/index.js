@@ -58,10 +58,19 @@ import "../node_modules/tether/dist/js/tether.js";
 import "../node_modules/jquery.easing/jquery.easing.min.js";
 import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 
+import "lightbox2";
+
+
 // ease in, ease out menus stuff
 import "./assets/js/grayscale.js";
 
-// webgl includes needed
+// communicate between HTML/DOM and WebGL
+import "./assets/js/app.js";
+
+
+// webgl 
+
+// includes needed
 import "three"
 
 import "./assets/webgl/js/controls/OrbitControls.js"
