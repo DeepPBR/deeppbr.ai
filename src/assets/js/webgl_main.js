@@ -130,7 +130,7 @@ function initGui() {
         material.roughness = value;
     } );
 
-    gui.add( settings, "lampIntensity" ).min( 0 ).max( 10 ).onChange( function( value ) {
+    gui.add( settings, "lampIntensity" ).min( 0 ).max( 2.1 ).onChange( function( value ) {
         directionalLight.intensity = value;
     } );
 
