@@ -15,8 +15,42 @@ var mesh;
 var pointLight;
 var directionalLight;
 //var lampBright;
+var sprite;
 
 var imageMapCurrent = 0
+
+var defaults = {
+    "00" : {
+        metalness: 0.2,
+        roughness: 1.3,
+        lampIntensity: 0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,    
+        displacementScale: 1.0, 
+        displacementBias: -0.428408,
+        normalScale: -0.7,
+    },
+    "01" : {
+        metalness: 0.2,
+        roughness: 1.3,
+        lampIntensity: 0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0, 
+        displacementScale: 1.0, 
+        displacementBias: -0.428408,
+        normalScale: -4,
+    },
+    "07" : {
+        metalness: 0.2,
+        roughness: 1.3,
+        lampIntensity: 0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,    
+        displacementScale: 1.0, 
+        displacementBias: -0.428408,
+        normalScale: -0.7,
+    },
+}
 
 var settings = {
     metalness: 0.2,
@@ -26,15 +60,11 @@ var settings = {
     envMapIntensity: 1.0,
     displacementScale: 2.0, // 2.436143, // from original model
     normalScale: -0.7,
-    mapImage: 0,
-    diffuse_map: "00_delit.jpg",
-    roughness_map: "00_rough.jpg",
-    normal_map: "00_norms.jpg"
-
 };
 
 var material = new THREE.MeshStandardMaterial();
 var materialSwap = new THREE.MeshStandardMaterial();
+
 initGui();
 init();
 animate();
@@ -52,7 +82,9 @@ function pad(n, width, z) {
 // Init gui
 function initGui() {
     var gui = new dat.GUI();
-    //var gui = gui.addFolder( "Material" );
+
+    // start with gui closed
+    gui.closed = true;
     
     gui.add( settings, "metalness" ).min( 0 ).max( 2 ).onChange( function( value ) {
         material.metalness = value;
@@ -66,52 +98,25 @@ function initGui() {
         pointLight.intensity = value;
     } );
 
-    gui.add( settings, 'mapImage', 0, 8 ).step( 1 )
-    .onChange( function( value )  {
-    
-        if (imageMapCurrent != value) {
-            console.log("DIFFERENT");
-            imageMapCurrent = value;
+    gui.add( settings, "envMapIntensity" ).min( 0 ).max( 10 ).onChange( function( value ) {
+        material.envMapIntensity = value;
+    } );
 
+    gui.add( settings, "displacementScale" ).min( -3.0 ).max( 3.0 ).onChange( function( value ) {
+        material.displacementScale = value;
+    } );
 
-            var formated = pad(value, 2);      // 0010
-            var dif = "_delit.jpg";
-            var nrm = "_norms.jpg";
-            var rog = "_rough.jpg";
-
-            settings.diffuse_map   = formated.concat(dif);
-            settings.normal_map    = formated.concat(nrm);
-            settings.roughness_map = formated.concat(rog);
-            var loader = new THREE.TextureLoader()
-                        .setPath( './assets/img/examples/');
-
-            materialSwap.map = loader.load(settings.diffuse_map);
-            // roughness is in G channel, metalness is in B channel
-            materialSwap.metalnessMap = material.roughnessMap = loader.load(settings.roughness_map); /// is this correct???
-            materialSwap.normalMap = loader.load(settings.normal_map);
-            material.map = materialSwap.map
-            material.roughnessMap = material.roughnessMap = materialSwap.roughnessMap
-            material.normalMap = materialSwap.normalMap
-
-            // console.log(formated.concat(dif));
-            // console.log(formated.concat(nrm));
-            // console.log(formated.concat(rog));
-        }
-    });
-
-    // gui.add( settings, "ambientIntensity" ).min( 0 ).max( 1 ).onChange( function( value ) {
-    //  ambientLight.intensity = value;
-    // } );
-    // gui.add( settings, "envMapIntensity" ).min( 0 ).max( 3 ).onChange( function( value ) {
-    //  material.envMapIntensity = value;
-    // } );
-    // gui.add( settings, "displacementScale" ).min( 0 ).max( 3.0 ).onChange( function( value ) {
-    //  material.displacementScale = value;
-    // } );
+    gui.add( settings, "displacementBias" ).min( -3.0 ).max( 3.0 ).onChange( function( value ) {
+        material.displacementBias = value;
+    } );
 
     gui.add( settings, "normalScale" ).min( -4 ).max( 3 ).onChange( function( value ) {
         material.normalScale.set( 1, -1 ).multiplyScalar( value );
     });
+    
+    // gui.add( settings, "ambientIntensity" ).min( 0 ).max( 1 ).onChange( function( value ) {
+    //  ambientLight.intensity = value;
+    // } );
 
 } // initGui
 
@@ -185,7 +190,7 @@ function init() {
      
     scene.add(directionalLight);
 
-    var sprite = new SpriteText2D("Zoom back in", { align: textAlign.center,  font: '140px Arial', fillStyle: '#00ff00' , antialias: false })
+    sprite = new SpriteText2D("Zoom back in", { align: textAlign.center,  font: '140px Arial', fillStyle: '#00ff00' , antialias: false })
     sprite.position.z = 60;
 
     scene.add(sprite)
@@ -195,17 +200,7 @@ function init() {
         .setPath( './assets/webgl/geo/' )
         .load( 'plane.geo', function ( group ) {
 
-            var loader = new THREE.TextureLoader()
-                .setPath( './assets/img/examples/' );
-
-            material.metalness = settings.metalness;
-            material.roughness = settings.roughness;
-            material.normalScale.set( 1, -1 ).multiplyScalar( settings.normalScale );
-
-            material.map = loader.load(settings.diffuse_map);
-            // roughness is in G channel, metalness is in B channel
-            material.metalnessMap = material.roughnessMap = loader.load(settings.roughness_map); /// is this correct???
-            material.normalMap = loader.load(settings.normal_map);
+            set_source_image("07");
 
             material.map.wrapS = THREE.RepeatWrapping;
             material.roughnessMap.wrapS = THREE.RepeatWrapping;
@@ -246,14 +241,6 @@ function init() {
 
         } );
 
-    var genCubeUrls = function( prefix, postfix ) {
-        return [
-            prefix + 'px' + postfix, prefix + 'nx' + postfix,
-            prefix + 'py' + postfix, prefix + 'ny' + postfix,
-            prefix + 'pz' + postfix, prefix + 'nz' + postfix
-        ];
-    };
-
 
     if ( statsEnabled ) {
 
@@ -265,7 +252,7 @@ function init() {
     setTimeout(onWindowResize, 100);
 
     window.addEventListener( 'resize', onWindowResize, false );
-    window.addEventListener( 'keydown', onKeyDown, true);
+    //window.addEventListener( 'keydown', onKeyDown, true);
 }
 
 //
@@ -283,51 +270,132 @@ function onWindowResize( event ) {
 
 }
 
-function onKeyDown( e ) {
-                var maps = [ 'rainbow', 'cooltowarm', 'blackbody', 'grayscale' ];
-                if ( e.keyCode === 65 ) {
-                   console
-                } else if ( e.keyCode === 83 ) {
-                   console
-                } else if ( e.keyCode === 68 ) {
-                   console
-                } else if ( e.keyCode === 70 ) {
-                  console
-                }
-            }
+function animate() {
 
-    //
+    requestAnimationFrame( animate );
 
-    function animate() {
+    controls.update();
+    renderer.render( scene, camera );
+    renderer.setClearColor( 0x808080, 1 );
+    // pointLight.position.x = camera.position.x;
+    // pointLight.position.y = camera.position.y;
+    // pointLight.position.z = camera.position.z;
 
-        requestAnimationFrame( animate );
+    // pointLight.rotation.x = camera.rotation.x;
+    // pointLight.rotation.y = camera.rotation.y;
+    // pointLight.rotation.z = camera.rotation.z;
 
-        controls.update();
-        renderer.render( scene, camera );
-                renderer.setClearColor( 0x000000, 1 );
-        pointLight.position.x = camera.position.x;
-        pointLight.position.y = camera.position.y;
-        pointLight.position.z = camera.position.z;
 
-        pointLight.rotation.x = camera.rotation.x;
-        pointLight.rotation.y = camera.rotation.y;
-        pointLight.rotation.z = camera.rotation.z;
+    directionalLight.position.x = camera.position.x;
+    directionalLight.position.y = camera.position.y;
+    directionalLight.position.z = camera.position.z;
 
-        directionalLight.position.x = camera.position.x;
-        directionalLight.position.y = camera.position.y;
-        directionalLight.position.z = camera.position.z;
+    directionalLight.rotation.x = camera.rotation.x;
+    directionalLight.rotation.y = camera.rotation.y;
+    directionalLight.rotation.z = camera.rotation.z;
 
-        directionalLight.rotation.x = camera.rotation.x;
-        directionalLight.rotation.y = camera.rotation.y;
-        directionalLight.rotation.z = camera.rotation.z;
+    sprite.position.y = camera.position.y;
+    sprite.position.z = camera.position.z;
 
-        sprite.position.y = camera.position.y;
-        sprite.position.z = camera.position.z;
+    sprite.rotation.x = camera.rotation.x;
+    sprite.rotation.y = camera.rotation.y;
+    sprite.rotation.z = camera.rotation.z;
 
-        sprite.rotation.x = camera.rotation.x;
-        sprite.rotation.y = camera.rotation.y;
-        sprite.rotation.z = camera.rotation.z;
+    if ( statsEnabled ) stats.update();
 
-        if ( statsEnabled ) stats.update();
+}
 
-    }
+
+function set_source_image( src_id )  {
+    
+    console.log("set_source_image: " + src_id);
+    
+    var diffuse_map   = src_id + "_delit.jpg";
+    var normal_map    = src_id + "_norms.jpg";
+    var roughness_map = src_id + "_rough.jpg";
+    var displacement_map = src_id + "_disp.jpg";
+
+    var loader = new THREE.TextureLoader()
+                .setPath( './assets/img/examples/');
+
+    var default_setting = defaults[src_id];
+    if (!(default_setting)) 
+        throw "You need to define some defaults[src_id] for src_id:" + src_id;
+
+    // update settings (for gui)
+    settings.metalness = default_setting.metalness;
+    settings.roughness = default_setting.roughness;
+    settings.lampIntensity = default_setting.lampIntensity;
+    settings.aoMapIntensity = default_setting.aoMapIntensity;
+    settings.envMapIntensity = default_setting.envMapIntensity;
+    settings.displacementScale = default_setting.displacementScale;
+    settings.displacementBias = default_setting.displacementBias;
+    settings.normalScale = default_setting.normalScale;
+
+    // update actual material 
+    // ??? do we have to do this or does it magically update via the gui code?
+    material.metalness = settings.metalness;
+    material.roughness = settings.roughness;
+    material.normalScale.set( 1, -1 ).multiplyScalar( settings.normalScale );
+    material.displacementScale = settings.displacementScale;
+    material.displacementBias = settings.displacementBias;
+   
+    // ???.lampIntensity = default_setting.lampIntensity;
+    // ???.aoMapIntensity = default_setting.aoMapIntensity;
+    // ???.envMapIntensity = default_setting.envMapIntensity;
+    
+
+    // load into the swap first (not sure this helps though!)
+    materialSwap.map = loader.load(diffuse_map);
+    materialSwap.normalMap = loader.load(normal_map);
+    materialSwap.displacementMap = loader.load(displacement_map);
+    materialSwap.roughnessMap = loader.load(roughness_map);
+    materialSwap.metalnessMap = materialSwap.roughnessMap;
+
+    // swap in the actual image
+    material.normalMap = materialSwap.normalMap;
+    material.displacementMap = materialSwap.displacementMap;
+    material.roughnessMap =materialSwap.roughnessMap;
+    material.metalnessMap = materialSwap.roughnessMap;
+    material.map = materialSwap.map;
+
+}
+
+module.exports = {
+  set_source_image: function(src_id) {
+        set_source_image(src_id);
+  }
+};
+
+// ideally we'd put this in app.js but stupid whatever doesnt work so whack it in here for now
+
+(function($) {
+    "use strict"; // Start of use strict
+    const regex = /(\d\d)_base/;
+
+    $(".select-source a").click(function(evt) {
+        var str = evt.target.src;
+        var match = str.match(regex)[1];
+        if (match) {
+            var src_id = pad(parseInt(match), 2); // 01
+            set_source_image(src_id);
+
+            $(".src_base img").attr("src", "assets/img/examples/" + src_id + "_base.jpg"); 
+            $(".src_base").attr("href", "assets/img/examples/" + src_id + "_base.jpg"); 
+
+            $(".src_norms img").attr("src", "assets/img/examples/" + src_id + "_norms.jpg"); 
+            $(".src_norms").attr("href", "assets/img/examples/" + src_id + "_norms.jpg"); 
+
+            $(".src_rough img").attr("src", "assets/img/examples/" + src_id + "_rough.jpg"); 
+            $(".src_rough").attr("href", "assets/img/examples/" + src_id + "_rough.jpg"); 
+
+            $(".src_delit img").attr("src", "assets/img/examples/" + src_id + "_delit.jpg"); 
+            $(".src_delit").attr("href", "assets/img/examples/" + src_id + "_delit.jpg"); 
+        }
+        
+    
+        evt.preventDefault();
+    })
+
+})(jQuery); // End of use strict
+
