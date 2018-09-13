@@ -47,3 +47,62 @@ $lead-font-size:   1.30rem;
 
 $spacer: 1.5rem;
 
+
+
+
+// .mobile-wrapper {
+//     display: block;
+//     div.select-source {
+//         display:flex;
+//         flex-basis: row wrap;
+//         background-color:red;
+//         > div {
+//             width: 100px;
+//             height: 100px;
+//             margin: auto;
+//             display: inline-flex;
+//         }
+//     }
+// }
+
+
+// div.select-source {
+//     background-color: green;
+//     > div {
+//         width: 100px;
+//         height: 100px;
+//         display: inline-flex;
+//     }
+// }
+
+
+div.results {
+
+    // width: 100%;
+    // div > a > img {
+    //     width: 140px;
+    //     height: 140px;
+    //     margin: auto;
+    // }
+
+    div > a {
+        color: white;
+    }
+}
+
+
+// div.desktop-wrapper {
+//     display: none;
+// }
+
+// @media screen and (min-width: 420px) {
+//     body {
+//         background-color: lightblue;
+//     }
+//     .mobile-wrapper {
+//         display: none;
+//     }
+//     div.desktop-wrapper {
+//         display: block;
+//     }
+// }

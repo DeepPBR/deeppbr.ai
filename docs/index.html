@@ -120,75 +120,80 @@
     
           <div class="row d-flex justify-content-start">
             <div class="p-1 col-md-12">
-              <p class="text-left">&nbsp;</p>
-              <p class="text-left">Click below to see results generated directly from unmodified source photos.</p>
+              <h4 class="mb-4 text-white text-left">Choose source image</h4>
+              <p class="text-left">Click on an image below to see results for that image. These results are generated using only machine learning and a single photo taken in normal light with a camera.</p>
             </div>
           </div>
+          <div class="row flex-row d-flex select-source">
     
-          <div class="row flex-row d-flex justify-content-start select-source">
-            <div class="col-md-12 p-1">
-              <h3 class="mb-4 text-white text-left">Source image</h3>
-            </div>
-            <div class="col-md-2 p-1 col-12">
+            <div class="col-md-2 p-1 col-xs-2 col-6">
               <a href="#">
-                <img class="d-block img-fluid" src="assets/img/examples/07_base.jpg"> </a>
+                <img class="d-block img-fluid" src="assets/img/examples/07_base_256.jpg">
+              </a>
             </div>
-            <div class="col-md-2 p-1 col-12">
+            <div class="col-md-2 p-1 col-xs-2 col-6">
               <a href="#">
-                <img class="d-block img-fluid" src="assets/img/examples/01_base.jpg"> </a>
+                <img class="d-block img-fluid" src="assets/img/examples/01_base_256.jpg">
+              </a>
             </div>
-            <div class="col-md-2 p-1 col-12">
+            <div class="col-md-2 p-1 col-xs-2 col-6">
               <a href="#">
-                <img class="d-block img-fluid" src="assets/img/examples/02_base.jpg"> </a>
+                <img class="d-block img-fluid" src="assets/img/examples/02_base_256.jpg">
+              </a>
             </div>
-            <div class="col-md-2 p-1 col-12">
+            <div class="col-md-2 p-1 col-xs-2 col-6">
               <a href="#">
-                <img class="d-block img-fluid" src="assets/img/examples/03_base.jpg"> </a>
+                <img class="d-block img-fluid" src="assets/img/examples/03_base_256.jpg">
+              </a>
             </div>
-            <div class="col-md-2 p-1 col-12">
+            <div class="col-md-2 p-1 col-xs-2 col-6">
               <a href="#">
-                <img class="d-block img-fluid" src="assets/img/examples/05_base.jpg"> </a>
+                <img class="d-block img-fluid" src="assets/img/examples/05_base_256.jpg">
+              </a>
             </div>
-            <div class="col-md-2 p-1 col-12">
+            <div class="col-md-2 p-1 col-xs-2 col-6">
               <a href="#">
-                <img class="d-block img-fluid" src="assets/img/examples/06_base.jpg"> </a>
+                <img class="d-block img-fluid" src="assets/img/examples/06_base_256.jpg">
+              </a>
             </div>
-          </div>      
-          <div class="row justify-content-start">
-            <div class="col-12 p-1 col-md-12">
+          </div>
+         
+          <div class="row d-flex justify-content-start">
+            <div class="p-1 col-md-12">
               <h3 class="mb-4 text-white text-left">Generated Model</h3>
               <div id="webgl_container" style="max-width:1110px"></div>
             </div>
           </div>
-          <div class="row flex-row d-flex justify-content-start results">
-            <div class="p-1 col-md-2 col-12">
-              <a href="assets/img/examples/07_base.jpg" data-lightbox="roadtrip" class="src_base">
-                <img class="d-block img-fluid" src="assets/img/examples/07_base.jpg">
-                <p>Source Image &nbsp;</p>
-              </a>
-            </div>
-            <div class="p-1 col-md-2 col-12">
+          
+          <div class="row flex-row d-flex results">
+            <div class="p-1 col-md-6 col-6">
               <a href="assets/img/examples/07_norms.jpg" data-lightbox="roadtrip" class="src_norms">
                 <img class="d-block img-fluid" src="assets/img/examples/07_norms.jpg">
                 <p>Normals</p>
               </a>
             </div>
-            <div class="p-1 col-md-2 col-12">
+            <div class="p-1 col-md-6 col-6">
               <a href="assets/img/examples/07_disp.jpg" data-lightbox="roadtrip" class="src_disp">
                 <img class="d-block img-fluid" src="assets/img/examples/07_disp.jpg">
                 <p>Displacement</p>
               </a>
             </div>
-            <div class="p-1 col-md-2 col-12">
+            <div class="p-1 col-md-6 col-6">
               <a href="assets/img/examples/07_rough.jpg" data-lightbox="roadtrip" class="src_rough">
                 <img class="d-block img-fluid" src="assets/img/examples/07_rough.jpg">
                 <p>Roughness</p>
               </a>
             </div>
-            <div class="p-1 col-md-2 col-12">
+            <div class="p-1 col-md-6 col-6">
               <a href="assets/img/examples/07_delit.jpg" data-lightbox="roadtrip" class="src_delit">
                 <img class="d-block img-fluid" src="assets/img/examples/07_delit.jpg">
                 <p>Diffuse</p>
+              </a>
+            </div>
+            <div class="p-1 col-md-12 col-12">
+              <a href="assets/img/examples/07_base.jpg" data-lightbox="roadtrip" class="src_base">
+                <img class="d-block img-fluid" src="assets/img/examples/07_base.jpg">
+                <p>Source Image &nbsp;</p>
               </a>
             </div>
           </div>
