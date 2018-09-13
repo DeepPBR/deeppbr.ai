@@ -1,225 +1,283 @@
 //if (!Detector.webgl ) Detector.addGetWebGLMessage();
-    var THREE = require('three');
+const THREE = require('three');
+const dat = require('dat.gui');
 
-    var statsEnabled = false;
+import { SpriteText2D, textAlign } from 'three-text2d'
 
-    var container, stats, loader;
+var statsEnabled = false;
 
-    var camera, scene, renderer, controls;
+var container, stats, loader;
 
-    var mesh;
+var camera, scene, renderer, controls;
 
-    var pointLight;
+var mesh;
 
-    //var lampBright;
+var pointLight;
+var spotLight;
+//var lampBright;
 
-    var settings = {
-        metalness: 0.0,
-        roughness: 0.4,
-        lampIntensity: 3,
-        aoMapIntensity: 1.0,
-        envMapIntensity: 1.0,
-        displacementScale: 2.436143, // from original model
-        normalScale: 1.0
-    };
+var imageMapCurrent = 0
 
+var settings = {
+    metalness: 0.2,
+    roughness: 1.3,
+    lampIntensity: 0.75,
+    aoMapIntensity: 1.0,
+    envMapIntensity: 1.0,
+    displacementScale: 2.0, // 2.436143, // from original model
+    normalScale: -0.7,
+    mapImage: 0,
+    diffuse_map: "07_delit.jpg",
+    roughness_map: "07_rough.jpg",
+    normal_map: "07_norms.jpg"
 
+};
 
+var material = new THREE.MeshStandardMaterial();
+var materialSwap = new THREE.MeshStandardMaterial();
+initGui();
+init();
+animate();
 
-    //initGui();
-    init();
-    animate();
+// function setImageMap() {
+//    // mesh.scale.set( params.scale, params.scale, params.scale );
+// }
+
+function pad(n, width, z) {
+  z = z || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+
+// Init gui
+function initGui() {
+    var gui = new dat.GUI();
+    //var gui = gui.addFolder( "Material" );
     
-    // Init gui
-    function initGui() {
-        var gui = new dat.GUI();
-        //var gui = gui.addFolder( "Material" );
-        gui.add( settings, "metalness" ).min( 0 ).max( 2 ).onChange( function( value ) {
-            material.metalness = value;
+    gui.add( settings, "metalness" ).min( 0 ).max( 2 ).onChange( function( value ) {
+        material.metalness = value;
+    } );
+    
+    gui.add( settings, "roughness" ).min( 0 ).max( 2 ).onChange( function( value ) {
+        material.roughness = value;
+    } );
+
+    gui.add( settings, "lampIntensity" ).min( 0 ).max( 10 ).onChange( function( value ) {
+        pointLight.intensity = value;
+    } );
+
+   
+    // start with gui closed
+    gui.closed = true;
+
+    // gui.add( settings, "ambientIntensity" ).min( 0 ).max( 1 ).onChange( function( value ) {
+    //  ambientLight.intensity = value;
+    // } );
+    // gui.add( settings, "envMapIntensity" ).min( 0 ).max( 3 ).onChange( function( value ) {
+    //  material.envMapIntensity = value;
+    // } );
+    // gui.add( settings, "displacementScale" ).min( 0 ).max( 3.0 ).onChange( function( value ) {
+    //  material.displacementScale = value;
+    // } );
+
+    gui.add( settings, "normalScale" ).min( -4 ).max( 3 ).onChange( function( value ) {
+        material.normalScale.set( 1, -1 ).multiplyScalar( value );
+    });
+
+} // initGui
+
+function hud() {
+
+}
+
+function init() {
+
+    container = document.getElementById( "webgl_container" );
+    renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer.setPixelRatio( window.devicePixelRatio );
+    
+    var canvasWidth = container.offsetWidth;
+    var canvasHeight = container.offsetHeight;
+    renderer.setSize( canvasWidth, canvasHeight);
+
+
+    container.appendChild( renderer.domElement );
+
+    // reposition gui to top left of the webgl element 
+    var gui = $( ".dg.ac" );
+    gui.detach().appendTo($("#webgl_container"));
+    gui.css("top", $("#webgl_container").css("top"));
+
+    renderer.gammaInput = true;
+    renderer.gammaOutput = true;
+
+    renderer.toneMapping = THREE.ReinhardToneMapping;
+    renderer.toneMappingExposure = 3;
+
+    scene = new THREE.Scene();
+
+    camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.01, 1000 );
+    camera.position.z = 2;
+    camera.rotation.x = Math.PI / 0.5
+    controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+    //scene.add( new THREE.HemisphereLight( 0x443333, 0x222233, 4 ) );
+    pointLight = new THREE.PointLight( 0xffffff, settings.lampBright, 0 );
+    pointLight.position.set(0,0,5);
+
+    scene.add(pointLight);
+    
+    new THREE.OBJLoader()
+        .setPath( './assets/webgl/geo/' )
+        .load( 'plane.geo', function ( group ) {
+
+            var loader = new THREE.TextureLoader()
+                .setPath( './assets/img/examples/' );
+
+            material.metalness = settings.metalness;
+            material.roughness = settings.roughness;
+            material.normalScale.set( 1, -1 ).multiplyScalar( settings.normalScale );
+
+            material.map = loader.load(settings.diffuse_map);
+            // roughness is in G channel, metalness is in B channel
+            material.metalnessMap = material.roughnessMap = loader.load(settings.roughness_map); /// is this correct???
+            material.normalMap = loader.load(settings.normal_map);
+
+            material.map.wrapS = THREE.RepeatWrapping;
+            material.roughnessMap.wrapS = THREE.RepeatWrapping;
+            material.metalnessMap.wrapS = THREE.RepeatWrapping;
+            material.normalMap.wrapS = THREE.RepeatWrapping;
+            material.side = THREE.DoubleSide;
+
+            group.traverse( function ( child ) {
+
+                if ( child instanceof THREE.Mesh ) {
+
+                    child.material = material;
+
+                }
+
+            } );
+
+            group.position.x = 0 ;
+            group.rotation.y = 0 ; - Math.PI / 2;
+            group.rotation.x = Math.PI / 2; 
+            scene.add( group );
+
         } );
-        gui.add( settings, "roughness" ).min( 0 ).max( 2 ).onChange( function( value ) {
-            material.roughness = value;
-        } );
-        gui.add( settings, "lampIntensity" ).min( 0 ).max( 10 ).onChange( function( value ) {
-            pointLight.intensity = value;
-        } );
-        // gui.add( settings, "ambientIntensity" ).min( 0 ).max( 1 ).onChange( function( value ) {
-        //  ambientLight.intensity = value;
-        // } );
-        // gui.add( settings, "envMapIntensity" ).min( 0 ).max( 3 ).onChange( function( value ) {
-        //  material.envMapIntensity = value;
-        // } );
-        // gui.add( settings, "displacementScale" ).min( 0 ).max( 3.0 ).onChange( function( value ) {
-        //  material.displacementScale = value;
-        // } );
-        gui.add( settings, "normalScale" ).min( - 1 ).max( 2 ).onChange( function( value ) {
-            material.normalScale.set( 1, -1 ).multiplyScalar( value );
-        } );
+
+
+    if ( statsEnabled ) {
+
+        stats = new Stats();
+        container.appendChild( stats.dom );
+
     }
 
-    function init() {
+    setTimeout(onWindowResize, 100);
 
-        container = document.getElementById( "webgl_container" );
-        renderer = new THREE.WebGLRenderer( { antialias: true } );
-        renderer.setPixelRatio( window.devicePixelRatio );
-        
-        var canvasWidth = container.offsetWidth;
-        var canvasHeight = container.offsetHeight;
-        renderer.setSize( canvasWidth, canvasHeight);
+    window.addEventListener( 'resize', onWindowResize, false );
+    //window.addEventListener( 'keydown', onKeyDown, true);
+}
+
+//
+
+function onWindowResize( event ) {
 
 
-        container.appendChild( renderer.domElement );
+    container = document.getElementById( "webgl_container" );
+    var canvasWidth = container.offsetWidth;
+    var canvasHeight = container.offsetHeight;
+    renderer.setSize( canvasWidth, canvasHeight);
 
-        // reposition gui to top left of the webgl element 
-        var gui = $( ".dg.ac" );
-        gui.detach().appendTo($("#webgl_container"));
-        gui.css("top", $("#webgl_container").css("top"));
+    camera.aspect = canvasWidth / canvasHeight; // window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
 
-        
+}
 
-        renderer.gammaInput = true;
-        renderer.gammaOutput = true;
+function animate() {
 
-        renderer.toneMapping = THREE.ReinhardToneMapping;
-        renderer.toneMappingExposure = 3;
+    requestAnimationFrame( animate );
 
-        //
+    controls.update();
+    renderer.render( scene, camera );
+    renderer.setClearColor( 0xB4B4B4, 1 );
+    pointLight.position.x = camera.position.x;
+    pointLight.position.y = camera.position.y;
+    pointLight.position.z = camera.position.z;
 
-        scene = new THREE.Scene();
+    pointLight.rotation.x = camera.rotation.x;
+    pointLight.rotation.y = camera.rotation.y;
+    pointLight.rotation.z = camera.rotation.z;
 
-        camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.01, 1000 );
-        camera.position.z = 2;
-        camera.rotation.x = Math.PI / 0.5
+    if ( statsEnabled ) stats.update();
 
-        controls = new THREE.OrbitControls( camera, renderer.domElement );
+}
 
-        //
 
-        //scene.add( new THREE.HemisphereLight( 0x443333, 0x222233, 4 ) );
-        pointLight = new THREE.PointLight( 0xffffff, settings.lampBright, 0 );
-        pointLight.position.set(0,0,5);
+function switch_source_image( src_id )  {
+    
+    console.log("switch_source_image: " + src_id);
+    
+    var formatted = pad(src_id, 2);      // 0010
+    var dif = "_delit.jpg";
+    var nrm = "_norms.jpg";
+    var rog = "_rough.jpg";
 
-        // var backLight = new THREE.PointLight(0xffffff, 3, 0);
-        // pointLight.position.set(0,0,-5);
-        scene.add(pointLight);
+    settings.diffuse_map   = formatted.concat(dif);
+    settings.normal_map    = formatted.concat(nrm);
+    settings.roughness_map = formatted.concat(rog);
+    var loader = new THREE.TextureLoader()
+                .setPath( './assets/img/examples/');
 
-        new THREE.CubeTextureLoader()
-            .setPath( './assets/webgl/textures/cube/pisa/' )
-            .load( [ 'px.png', 'nx.png', 'py.png', 'ny.png', 'pz.png', 'nz.png' ], function ( textureCube ) {
+    materialSwap.map = loader.load(settings.diffuse_map);
+    // roughness is in G channel, metalness is in B channel
+    materialSwap.metalnessMap = material.roughnessMap = loader.load(settings.roughness_map); /// is this correct???
+    materialSwap.normalMap = loader.load(settings.normal_map);
+    material.map = materialSwap.map
+    material.roughnessMap = material.roughnessMap = materialSwap.roughnessMap
+    material.normalMap = materialSwap.normalMap
 
-                scene.background = textureCube;
+    // console.log(formated.concat(dif));
+    // console.log(formated.concat(nrm));
+    // console.log(formated.concat(rog));
+}
 
-            } );
+module.exports = {
+  switch_source_image: function(src_id) {
+        switch_source_image(src_id);
+  }
+};
 
-        //
+// ideally we'd put this in app.js but stupid whatever doesnt work so whack it in here for now
 
-        var material = new THREE.MeshStandardMaterial();
+(function($) {
+    "use strict"; // Start of use strict
+    const regex = /(\d\d)_base/;
 
-        new THREE.OBJLoader()
-            .setPath( './assets/webgl/geo/' )
-            .load( 'plane.geo', function ( group ) {
+    $(".select-source a").click(function(evt) {
+        var str = evt.target.src;
+        var match = str.match(regex)[1];
+        if (match) {
+            var src_id = parseInt(match);
+            switch_source_image(src_id);
+            var src = pad(src_id, 2);      // 01
+            $(".src_base img").attr("src", "assets/img/examples/" + src + "_base.jpg"); 
+            $(".src_base").attr("href", "assets/img/examples/" + src + "_base.jpg"); 
 
-                var loader = new THREE.TextureLoader()
-                    .setPath( './assets/webgl/textures/demo_textures/' );
+            $(".src_norms img").attr("src", "assets/img/examples/" + src + "_norms.jpg"); 
+            $(".src_norms").attr("href", "assets/img/examples/" + src + "_norms.jpg"); 
 
-                material.roughness = 0.75; // attenuates roughnessMap
-                material.metalness = 1.0; // attenuates metalnessMap
+            $(".src_rough img").attr("src", "assets/img/examples/" + src + "_rough.jpg"); 
+            $(".src_rough").attr("href", "assets/img/examples/" + src + "_rough.jpg"); 
 
-                material.map = loader.load( 'ceil_4_diffuse.jpg' );
-                // roughness is in G channel, metalness is in B channel
-                material.metalnessMap = material.roughnessMap = loader.load( 'ceil_4_roughness.jpg' );
-                material.normalMap = loader.load( 'ceil_4_normals.jpg' );
-
-                material.map.wrapS = THREE.RepeatWrapping;
-                material.roughnessMap.wrapS = THREE.RepeatWrapping;
-                material.metalnessMap.wrapS = THREE.RepeatWrapping;
-                material.normalMap.wrapS = THREE.RepeatWrapping;
-                material.side = THREE.DoubleSide;
-
-                group.traverse( function ( child ) {
-
-                    if ( child instanceof THREE.Mesh ) {
-
-                        child.material = material;
-
-                    }
-
-                } );
-
-                group.position.x = - 0.45;
-                group.rotation.y = 0 ; - Math.PI / 2;
-                group.rotation.x = Math.PI / 2; 
-                scene.add( group );
-
-            } );
-
-        var genCubeUrls = function( prefix, postfix ) {
-            return [
-                prefix + 'px' + postfix, prefix + 'nx' + postfix,
-                prefix + 'py' + postfix, prefix + 'ny' + postfix,
-                prefix + 'pz' + postfix, prefix + 'nz' + postfix
-            ];
-        };
-
-        var hdrUrls = genCubeUrls( './assets/webgl/textures/cube/pisaHDR/', '.hdr' );
-        new THREE.HDRCubeTextureLoader().load( THREE.UnsignedByteType, hdrUrls, function ( hdrCubeMap ) {
-
-            var pmremGenerator = new THREE.PMREMGenerator( hdrCubeMap );
-            pmremGenerator.update( renderer );
-
-            var pmremCubeUVPacker = new THREE.PMREMCubeUVPacker( pmremGenerator.cubeLods );
-            pmremCubeUVPacker.update( renderer );
-
-            var hdrCubeRenderTarget = pmremCubeUVPacker.CubeUVRenderTarget;
-
-            //material.envMap = hdrCubeRenderTarget.texture;
-            material.needsUpdate = true; // is this needed?
-
-            hdrCubeMap.dispose();
-            pmremGenerator.dispose();
-            pmremCubeUVPacker.dispose();
-
-        } );
-
-        //
-
-        if ( statsEnabled ) {
-
-            stats = new Stats();
-            container.appendChild( stats.dom );
-
+            $(".src_delit img").attr("src", "assets/img/examples/" + src + "_delit.jpg"); 
+            $(".src_delit").attr("href", "assets/img/examples/" + src + "_delit.jpg"); 
         }
+        
+    
+        evt.preventDefault();
+    })
 
-        setTimeout(onWindowResize, 100);
+})(jQuery); // End of use strict
 
-        window.addEventListener( 'resize', onWindowResize, false );
-
-    }
-
-    //
-
-    function onWindowResize( event ) {
-
-
-        container = document.getElementById( "webgl_container" );
-        var canvasWidth = container.offsetWidth;
-        var canvasHeight = container.offsetHeight;
-        renderer.setSize( canvasWidth, canvasHeight);
-
-        camera.aspect = canvasWidth / canvasHeight; // window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-
-    }
-
-    //
-
-    function animate() {
-
-        requestAnimationFrame( animate );
-
-        controls.update();
-        renderer.render( scene, camera );
-
-        if ( statsEnabled ) stats.update();
-
-    }
