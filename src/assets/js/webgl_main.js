@@ -19,48 +19,84 @@ var sprite;
 
 var imageMapCurrent = 0
 
-var defaults = {
-    "00" : {
-        metalness: 0.2,
-        roughness: 1.3,
-        lampIntensity: 0.75,
-        aoMapIntensity: 1.0,
-        envMapIntensity: 1.0,    
-        displacementScale: 1.0, 
-        displacementBias: -0.428408,
-        normalScale: -0.7,
-    },
-    "01" : {
-        metalness: 0.2,
-        roughness: 1.3,
-        lampIntensity: 0.75,
-        aoMapIntensity: 1.0,
-        envMapIntensity: 1.0, 
-        displacementScale: 1.0, 
-        displacementBias: -0.428408,
-        normalScale: -4,
-    },
-    "07" : {
-        metalness: 0.2,
-        roughness: 1.3,
-        lampIntensity: 0.75,
-        aoMapIntensity: 1.0,
-        envMapIntensity: 1.0,    
-        displacementScale: 1.0, 
-        displacementBias: -0.428408,
-        normalScale: -0.7,
-    },
-}
-
 var settings = {
     metalness: 0.2,
     roughness: 1.3,
-    lampIntensity: 0.75,
+    lampIntensity: 5, //0.75,
     aoMapIntensity: 1.0,
     envMapIntensity: 1.0,
-    displacementScale: 2.0, // 2.436143, // from original model
+    dispScale: 2.0, // 2.436143, // from original model
+    dispBias: 0.5, // -0.428408,
     normalScale: -0.7,
 };
+
+var defaults = {
+    "07" : {
+        metalness: 0.35,
+        roughness: 0.8,
+        lampIntensity: 5, //0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,
+        dispScale: 0.2, // 2.436143, // from original model
+        dispBias: -0.09, // -0.428408,
+        normalScale: -0.7,
+    },
+    "01" : {
+        metalness: 0.22,
+        roughness: 0.9,
+        lampIntensity: 5, //0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,
+        dispScale: 0.1, // 2.436143, // from original model
+        dispBias: 0.01, // -0.428408,
+        normalScale: -0.7,
+    },
+    "02" : {
+        metalness: 0.31,
+        roughness: 0.8,
+        lampIntensity: 5, //0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,
+        dispScale: 0.2, // 2.436143, // from original model
+        dispBias: 0.05, // -0.428408,
+        normalScale: -0.94,
+    },
+    "03" : {
+        metalness: 0.7,
+        roughness: 0.9,
+        lampIntensity: 5, //0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,
+        dispScale: 0.2, // 2.436143, // from original model
+        dispBias: -0.12, // -0.428408,
+        normalScale: -0.64,
+    },
+    "05" : {
+        metalness: 0.1,
+        roughness: 0.7,
+        lampIntensity: 5, //0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,
+        dispScale: 0.1, // 2.436143, // from original model
+        dispBias: -0.09, // -0.428408,
+        normalScale: -0.64,
+    },
+    "06" : {
+        metalness: 0.27,
+        roughness: 0.8,
+        lampIntensity: 5, //0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,
+        dispScale: 0.2, // 2.436143, // from original model
+        dispBias: -0.12, // -0.428408,
+        normalScale: -1.02,
+    },
+}
+
+defaults["07"].lampIntensity = 6;
+
+
+console.log(defaults["07"]);
 
 var material = new THREE.MeshStandardMaterial();
 var materialSwap = new THREE.MeshStandardMaterial();
@@ -95,18 +131,18 @@ function initGui() {
     } );
 
     gui.add( settings, "lampIntensity" ).min( 0 ).max( 10 ).onChange( function( value ) {
-        pointLight.intensity = value;
+        directionalLight.intensity = value;
     } );
 
     gui.add( settings, "envMapIntensity" ).min( 0 ).max( 10 ).onChange( function( value ) {
         material.envMapIntensity = value;
     } );
 
-    gui.add( settings, "displacementScale" ).min( -3.0 ).max( 3.0 ).onChange( function( value ) {
+    gui.add( settings, "dispScale" ).min( -3.0 ).max( 3.0 ).onChange( function( value ) {
         material.displacementScale = value;
     } );
 
-    gui.add( settings, "displacementBias" ).min( -3.0 ).max( 3.0 ).onChange( function( value ) {
+    gui.add( settings, "dispBias" ).min( -3.0 ).max( 3.0 ).onChange( function( value ) {
         material.displacementBias = value;
     } );
 
@@ -198,7 +234,7 @@ function init() {
     
     new THREE.OBJLoader()
         .setPath( './assets/webgl/geo/' )
-        .load( 'plane.geo', function ( group ) {
+        .load( 'plane_sub_div_40.geo', function ( group ) {
 
             set_source_image("07");
 
@@ -233,7 +269,14 @@ function init() {
             shadowPlane.castShadow = true;
             //shadowPlane.receiveShadow = true;
 
+            var groundGeo = new THREE.SphereGeometry(0.1, 5, 5, 0, Math.PI * 2, 0, Math.PI * 2);
+            var groundMat = new THREE.MeshPhongMaterial( {color: 0x444444, side: THREE.BackSide});
+            var groundNode = new THREE.Mesh(groundGeo, groundMat);
+            groundNode.receiveShadow = false
 
+            groundNode.position.z = 0;
+
+            //scene.add(groundNode);
             scene.add(sphere);
             scene.add( group );
             //scene.add(shadowPlane);
@@ -318,29 +361,23 @@ function set_source_image( src_id )  {
     var loader = new THREE.TextureLoader()
                 .setPath( './assets/img/examples/');
 
-    var default_setting = defaults[src_id];
-    if (!(default_setting)) 
+    var new_defaults = defaults[src_id];
+    if (!(new_defaults)) 
         throw "You need to define some defaults[src_id] for src_id:" + src_id;
 
     // update settings (for gui)
-    settings.metalness = default_setting.metalness;
-    settings.roughness = default_setting.roughness;
-    settings.lampIntensity = default_setting.lampIntensity;
-    settings.aoMapIntensity = default_setting.aoMapIntensity;
-    settings.envMapIntensity = default_setting.envMapIntensity;
-    settings.displacementScale = default_setting.displacementScale;
-    settings.displacementBias = default_setting.displacementBias;
-    settings.normalScale = default_setting.normalScale;
-
+    Object.assign(settings, new_defaults);
+    
     // update actual material 
-    // ??? do we have to do this or does it magically update via the gui code?
     material.metalness = settings.metalness;
     material.roughness = settings.roughness;
     material.normalScale.set( 1, -1 ).multiplyScalar( settings.normalScale );
-    material.displacementScale = settings.displacementScale;
-    material.displacementBias = settings.displacementBias;
+    material.displacementScale = settings.dispScale;
+    material.displacementBias = settings.dispBias;
    
-    // ???.lampIntensity = default_setting.lampIntensity;
+    // ?? is this the right light?
+    directionalLight.lampIntensity = settings.lampIntensity;
+    console.log("lampIntensity " + settings.lampIntensity);
     // ???.aoMapIntensity = default_setting.aoMapIntensity;
     // ???.envMapIntensity = default_setting.envMapIntensity;
     
@@ -358,6 +395,8 @@ function set_source_image( src_id )  {
     material.roughnessMap =materialSwap.roughnessMap;
     material.metalnessMap = materialSwap.roughnessMap;
     material.map = materialSwap.map;
+
+    animate();
 
 }
 
@@ -388,6 +427,9 @@ module.exports = {
 
             $(".src_rough img").attr("src", "assets/img/examples/" + src_id + "_rough.jpg"); 
             $(".src_rough").attr("href", "assets/img/examples/" + src_id + "_rough.jpg"); 
+
+            $(".src_disp img").attr("src", "assets/img/examples/" + src_id + "_disp.jpg"); 
+            $(".src_disp").attr("href", "assets/img/examples/" + src_id + "_disp.jpg"); 
 
             $(".src_delit img").attr("src", "assets/img/examples/" + src_id + "_delit.jpg"); 
             $(".src_delit").attr("href", "assets/img/examples/" + src_id + "_delit.jpg"); 
