@@ -440,4 +440,3 @@ module.exports = {
     })
 
 })(jQuery); // End of use strict
-
