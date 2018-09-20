@@ -63,7 +63,42 @@ import "./assets/img/examples/08_norms.jpg";
 import "./assets/img/examples/08_rough.jpg";
 import "./assets/img/examples/08_disp.jpg";
 
-
+// import "./assets/img/examples/11_base.jpg";
+// import "./assets/img/examples/11_base_256.jpg";
+// import "./assets/img/examples/11_delit.jpg";
+// import "./assets/img/examples/11_norms.jpg";
+// import "./assets/img/examples/11_rough.jpg";
+// import "./assets/img/examples/11_disp.jpg";
+// import "./assets/img/examples/12_base.jpg";
+// import "./assets/img/examples/12_base_256.jpg";
+// import "./assets/img/examples/12_delit.jpg";
+// import "./assets/img/examples/12_norms.jpg";
+// import "./assets/img/examples/12_rough.jpg";
+// import "./assets/img/examples/12_disp.jpg";
+// import "./assets/img/examples/13_base.jpg";
+// import "./assets/img/examples/13_base_256.jpg";
+// import "./assets/img/examples/13_delit.jpg";
+// import "./assets/img/examples/13_norms.jpg";
+// import "./assets/img/examples/13_rough.jpg";
+// import "./assets/img/examples/13_disp.jpg";
+// import "./assets/img/examples/14_base.jpg";
+// import "./assets/img/examples/14_base_256.jpg";
+// import "./assets/img/examples/14_delit.jpg";
+// import "./assets/img/examples/14_norms.jpg";
+// import "./assets/img/examples/14_rough.jpg";
+// import "./assets/img/examples/14_disp.jpg";
+// import "./assets/img/examples/15_base.jpg";
+// import "./assets/img/examples/15_base_256.jpg";
+// import "./assets/img/examples/15_delit.jpg";
+// import "./assets/img/examples/15_norms.jpg";
+// import "./assets/img/examples/15_rough.jpg";
+// import "./assets/img/examples/15_disp.jpg";
+// import "./assets/img/examples/16_base.jpg";
+// import "./assets/img/examples/16_base_256.jpg";
+// import "./assets/img/examples/16_delit.jpg";
+// import "./assets/img/examples/16_norms.jpg";
+// import "./assets/img/examples/16_rough.jpg";
+// import "./assets/img/examples/16_disp.jpg";
 
 
 import "./assets/img/bg-masthead.jpg";
@@ -78,6 +113,8 @@ import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 
 import "lightbox2";
 
+import "../node_modules/slick-carousel/slick/slick.js";
+import "../node_modules/slick-carousel/slick/slick.css";
 
 // ease in, ease out menus stuff
 import "./assets/js/grayscale.js";

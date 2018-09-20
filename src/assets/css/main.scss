@@ -55,3 +55,40 @@ div.results {
     }
 }
 
+#how .select-source.slick-slider {
+
+  .slick-prev,
+  .slick-next {
+    font-size: 5rem;
+    width: 10%;
+    height: 260px;
+    line-height: 260px;
+    i {
+      height: 260px;
+      width: 100%;
+      cursor: pointer;
+    }
+  }
+  .slick-list {
+
+    width: 80%;
+    //height: 200px;
+  }
+  ul.slick-dots {
+    width: 100%;
+    flex-flow: row nowrap;
+    li {
+      display: inline-flex;
+      button {
+        background: #cccaca;
+        margin-left: 4px;
+        margin-right: 4px;
+        width: 35px;
+      }
+    }
+  }
+  // .slick-prev{ left: 0 }
+  // .slick-next{ right: 0 }
+  
+}
+

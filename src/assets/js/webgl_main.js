@@ -91,6 +91,66 @@ var defaults = {
         dispBias: -0.12, // -0.428408,
         normalScale: -1.02,
     },
+    "11" : {
+        metalness: 0.35,
+        roughness: 0.8,
+        lampIntensity: 5, //0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,
+        dispScale: 0.2, // 2.436143, // from original model
+        dispBias: -0.09, // -0.428408,
+        normalScale: -0.7,
+    },
+    "12" : {
+        metalness: 0.35,
+        roughness: 0.8,
+        lampIntensity: 5, //0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,
+        dispScale: 0.2, // 2.436143, // from original model
+        dispBias: -0.09, // -0.428408,
+        normalScale: -0.7,
+    },
+    "13" : {
+        metalness: 0.35,
+        roughness: 0.8,
+        lampIntensity: 5, //0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,
+        dispScale: 0.2, // 2.436143, // from original model
+        dispBias: -0.09, // -0.428408,
+        normalScale: -0.7,
+    },
+    "14" : {
+        metalness: 0.35,
+        roughness: 0.8,
+        lampIntensity: 5, //0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,
+        dispScale: 0.2, // 2.436143, // from original model
+        dispBias: -0.09, // -0.428408,
+        normalScale: -0.7,
+    },
+    "15" : {
+        metalness: 0.35,
+        roughness: 0.8,
+        lampIntensity: 5, //0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,
+        dispScale: 0.2, // 2.436143, // from original model
+        dispBias: -0.09, // -0.428408,
+        normalScale: -0.7,
+    },
+    "16" : {
+        metalness: 0.35,
+        roughness: 0.8,
+        lampIntensity: 5, //0.75,
+        aoMapIntensity: 1.0,
+        envMapIntensity: 1.0,
+        dispScale: 0.2, // 2.436143, // from original model
+        dispBias: -0.09, // -0.428408,
+        normalScale: -0.7,
+    }
 }
 
 defaults["07"].lampIntensity = 6;
