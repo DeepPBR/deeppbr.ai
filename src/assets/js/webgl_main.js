@@ -20,141 +20,138 @@ var sprite;
 var imageMapCurrent = 0
 
 var settings = {
-    metalness: 0.2,
-    roughness: 1.3,
-    lampIntensity: 5, //0.75,
+    metalness: 0,
+    roughness: 1,
+    lampIntensity: 0, //0.75,
     aoMapIntensity: 1.0,
     envMapIntensity: 1.0,
     dispScale: 2.0, // 2.436143, // from original model
     dispBias: 0.5, // -0.428408,
-    normalScale: -0.7,
+    normalScale: 1,
 };
 
 var defaults = {
     "07" : {
-        metalness: 0.35,
-        roughness: 0.8,
-        lampIntensity: 5, //0.75,
+        metalness: 0, // 0.35,
+        roughness: 1, // 0.8,
+        lampIntensity: 0, // 5, //0.75,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
         dispScale: 0.2, // 2.436143, // from original model
         dispBias: -0.09, // -0.428408,
-        normalScale: -0.7,
+        normalScale: 1, // -0.7,
     },
     "01" : {
-        metalness: 0.22,
-        roughness: 0.9,
-        lampIntensity: 5, //0.75,
+        metalness: 0, // 0.22,
+        roughness: 1, // 0.9,
+        lampIntensity: 0, // 5, //0.75,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
         dispScale: 0.1, // 2.436143, // from original model
         dispBias: 0.01, // -0.428408,
-        normalScale: -0.7,
+        normalScale: 1, // -0.7,
     },
     "02" : {
-        metalness: 0.31,
-        roughness: 0.8,
-        lampIntensity: 5, //0.75,
+        metalness: 0, // 0.31,
+        roughness: 1, // 0.8,
+        lampIntensity: 0, // 5, //0.75,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
         dispScale: 0.2, // 2.436143, // from original model
         dispBias: 0.05, // -0.428408,
-        normalScale: -0.94,
+        normalScale: 1, // -0.94,
     },
     "03" : {
-        metalness: 0.7,
-        roughness: 0.9,
-        lampIntensity: 5, //0.75,
+        metalness: 0, // 0.7,
+        roughness: 1, // 0.9,
+        lampIntensity: 0, // 5, //0.75,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
         dispScale: 0.2, // 2.436143, // from original model
         dispBias: -0.12, // -0.428408,
-        normalScale: -0.64,
+        normalScale: 1, // -0.64,
     },
     "05" : {
-        metalness: 0.1,
-        roughness: 0.7,
-        lampIntensity: 5, //0.75,
+        metalness: 0, // 0.1,
+        roughness: 1, // 0.7,
+        lampIntensity: 0, // 5, //0.75,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
         dispScale: 0.1, // 2.436143, // from original model
         dispBias: -0.09, // -0.428408,
-        normalScale: -0.64,
+        normalScale: 1, // -0.64,
     },
     "06" : {
-        metalness: 0.27,
-        roughness: 0.8,
-        lampIntensity: 5, //0.75,
+        metalness: 0, // 0.27,
+        roughness: 1, // 0.8,
+        lampIntensity: 0, // 5, //0.75,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
         dispScale: 0.2, // 2.436143, // from original model
         dispBias: -0.12, // -0.428408,
-        normalScale: -1.02,
+        normalScale: 1, // -1.02,
     },
     "11" : {
-        metalness: 0.35,
-        roughness: 0.8,
-        lampIntensity: 5, //0.75,
+        metalness: 0, // 0.35,
+        roughness: 1, // 0.8,
+        lampIntensity: 0, // 5, //0.75,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
         dispScale: 0.2, // 2.436143, // from original model
         dispBias: -0.09, // -0.428408,
-        normalScale: -0.7,
+        normalScale: 1, // -0.7,
     },
     "12" : {
-        metalness: 0.35,
-        roughness: 0.8,
-        lampIntensity: 5, //0.75,
+        metalness: 0, // 0.35,
+        roughness: 1, // 0.8,
+        lampIntensity: 0, // 5, //0.75,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
         dispScale: 0.2, // 2.436143, // from original model
         dispBias: -0.09, // -0.428408,
-        normalScale: -0.7,
+        normalScale: 1, // -0.7,
     },
     "13" : {
-        metalness: 0.35,
-        roughness: 0.8,
-        lampIntensity: 5, //0.75,
+        metalness: 0, // 0.35,
+        roughness: 1, // 0.8,
+        lampIntensity: 0, // 5, //0.75,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
         dispScale: 0.2, // 2.436143, // from original model
         dispBias: -0.09, // -0.428408,
-        normalScale: -0.7,
+        normalScale: 1, // -0.7,
     },
     "14" : {
-        metalness: 0.35,
-        roughness: 0.8,
-        lampIntensity: 5, //0.75,
+        metalness: 0, // 0.35,
+        roughness: 1, // 0.8,
+        lampIntensity: 0, // 5, //0.75,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
         dispScale: 0.2, // 2.436143, // from original model
         dispBias: -0.09, // -0.428408,
-        normalScale: -0.7,
+        normalScale: 1, // -0.7,
     },
     "15" : {
-        metalness: 0.35,
-        roughness: 0.8,
-        lampIntensity: 5, //0.75,
+        metalness: 0, // 0.35,
+        roughness: 1, // 0.8,
+        lampIntensity: 0, // 5, //0.75,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
         dispScale: 0.2, // 2.436143, // from original model
         dispBias: -0.09, // -0.428408,
-        normalScale: -0.7,
+        normalScale: 1, // -0.7,
     },
     "16" : {
-        metalness: 0.35,
-        roughness: 0.8,
-        lampIntensity: 5, //0.75,
+        metalness: 0, // 0.35,
+        roughness: 1, // 0.8,
+        lampIntensity: 0, // 5, //0.75,
         aoMapIntensity: 1.0,
         envMapIntensity: 1.0,
         dispScale: 0.2, // 2.436143, // from original model
         dispBias: -0.09, // -0.428408,
-        normalScale: -0.7,
+        normalScale: 1, // -0.7,
     }
 }
-
-defaults["07"].lampIntensity = 6;
-
 
 console.log(defaults["07"]);
 
@@ -185,14 +182,18 @@ function initGui() {
     gui.add( settings, "metalness" ).min( 0 ).max( 2 ).onChange( function( value ) {
         material.metalness = value;
     } );
-    
-    gui.add( settings, "roughness" ).min( 0 ).max( 2 ).onChange( function( value ) {
-        material.roughness = value;
-    } );
 
     gui.add( settings, "lampIntensity" ).min( 0 ).max( 2.1 ).onChange( function( value ) {
         directionalLight.intensity = value;
     } );
+
+    gui.add( settings, "roughness" ).min( 0 ).max( 2 ).onChange( function( value ) {
+        material.roughness = value;
+    } );
+
+    gui.add( settings, "normalScale" ).min( -4 ).max( 5 ).onChange( function( value ) {
+        material.normalScale.set( 1, -1 ).multiplyScalar( value );
+    });
 
     gui.add( settings, "envMapIntensity" ).min( 0 ).max( 10 ).onChange( function( value ) {
         material.envMapIntensity = value;
@@ -206,9 +207,7 @@ function initGui() {
         material.displacementBias = value;
     } );
 
-    gui.add( settings, "normalScale" ).min( -4 ).max( 3 ).onChange( function( value ) {
-        material.normalScale.set( 1, -1 ).multiplyScalar( value );
-    });
+
     
     // gui.add( settings, "ambientIntensity" ).min( 0 ).max( 1 ).onChange( function( value ) {
     //  ambientLight.intensity = value;
