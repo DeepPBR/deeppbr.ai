@@ -73,6 +73,9 @@ div.results {
 
     width: 80%;
     //height: 200px;
+    .slick-slide img {
+      margin:auto;
+    }
   }
   ul.slick-dots {
     width: 100%;
@@ -95,22 +98,30 @@ div.results {
 #how #webgl_container {
   max-width: 512px;
   margin:auto;
-  
 }
 
 #how .results {
-  .src_base img {
-    width: 512px;
-    height: 512px;
-    max-height: 100%
-    
-  }
   .src_norms img,
   .src_disp img,
   .src_rough img,
-  .src_delit img{
-    width: 512px;
-    height: 512px;
-    max-height: 100%
+  .src_delit img,
+  .src_base img {
+    max-width: 256px;
+  }
+}
+@media(min-width: 768px) {
+  #how .results {
+    .src_base img {
+      max-width: 512px;
+      max-height: 512px;
+    }
+
+    .src_norms img,
+    .src_disp img,
+    .src_rough img,
+    .src_delit img{
+      max-width: 512px;
+      max-height: 512px;
+    }
   }
 }
