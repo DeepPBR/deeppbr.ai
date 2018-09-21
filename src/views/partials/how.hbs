@@ -14,7 +14,7 @@
 
       <div class="row d-flex justify-content-start">
         <div class="p-1 col-md-12">
-          <h4 class="mb-4 text-white text-left">See for yourself</h4>
+          <h3 class="mb-4 text-white text-left">See for yourself</h3>
           <p class="text-left">Click on an image below to see our early results. Below is the single photo taken in normal light, models are generated from these images.</p>
         </div>
       </div>
@@ -22,76 +22,79 @@
 
         <div>
           <a href="#">
-            <img src="assets/img/examples/07_base_256.jpg">
+            <img data-lazy="assets/img/examples/07_base_256.jpg">
           </a>
         </div>
         <div>
           <a href="#">
-            <img src="assets/img/examples/01_base_256.jpg">
+            <img data-lazy="assets/img/examples/01_base_256.jpg">
           </a>
         </div>
         <div>
           <a href="#">
-            <img src="assets/img/examples/02_base_256.jpg">
+            <img data-lazy="assets/img/examples/02_base_256.jpg">
           </a>
         </div>
         <div>
           <a href="#">
-            <img src="assets/img/examples/03_base_256.jpg">
+            <img data-lazy="assets/img/examples/03_base_256.jpg">
           </a>
         </div>
         <div>
           <a href="#">
-            <img src="assets/img/examples/05_base_256.jpg">
+            <img data-lazy="assets/img/examples/05_base_256.jpg">
           </a>
         </div>
         <div>
           <a href="#">
-            <img src="assets/img/examples/06_base_256.jpg">
+            <img data-lazy="assets/img/examples/06_base_256.jpg">
+          </a>
+        </div>
+        {{!-- <div>
+          <a href="#">
+            <img data-lazy="assets/img/examples/11_base_256.jpg">
           </a>
         </div>
         <div>
           <a href="#">
-            <img src="assets/img/examples/11_base_256.jpg">
+            <img data-lazy="assets/img/examples/12_base_256.jpg">
           </a>
         </div>
         <div>
           <a href="#">
-            <img src="assets/img/examples/12_base_256.jpg">
+            <img data-lazy="assets/img/examples/13_base_256.jpg">
           </a>
         </div>
         <div>
           <a href="#">
-            <img src="assets/img/examples/13_base_256.jpg">
+            <img data-lazy="assets/img/examples/14_base_256.jpg">
           </a>
         </div>
         <div>
           <a href="#">
-            <img src="assets/img/examples/14_base_256.jpg">
+            <img data-lazy="assets/img/examples/15_base_256.jpg">
           </a>
-        </div>{{!-- 
+        </div>
         <div>
           <a href="#">
-            <img src="assets/img/examples/15_base_256.jpg">
+            <img data-lazy="assets/img/examples/16_base_256.jpg">
           </a>
         </div> --}}
-        <div>
-          <a href="#">
-            <img src="assets/img/examples/16_base_256.jpg">
-          </a>
-        </div>
 
       </div>
      
       <div class="row d-flex justify-content-start">
         <div class="p-1 col-md-12">
-          <h3 class="mb-4 text-white text-left">Generated Model</h3>
+          <h4 class="mb-4 text-white text-left">Generated Model (Rendered in WebGL)</h4>
           <p class="text-left text-white"><i>Click and drag to rotate..</i></p>
-          <div id="webgl_container" style="max-width:1110px"></div>
+          <div id="webgl_container" ></div>
         </div>
       </div>
       
       <div class="row flex-row d-flex results">
+        <div class="p-1 col-md-12">
+          <h4 class="mb-4 text-white text-left">Generated files</h4>
+        </div>
         <div class="p-1 col-md-6 col-6">
           <a href="assets/img/examples/07_norms.jpg" data-lightbox="roadtrip" class="src_norms">
             <img src="assets/img/examples/07_norms.jpg">
@@ -117,6 +120,8 @@
           </a>
         </div>
         <div class="p-1 col-md-12 col-12">
+          <h4 class="mb-4 text-white text-left">Source file</h4>
+
           <a href="assets/img/examples/07_base.jpg" data-lightbox="roadtrip" class="src_base">
             <img src="assets/img/examples/07_base.jpg">
             <p>Source Image &nbsp;</p>
