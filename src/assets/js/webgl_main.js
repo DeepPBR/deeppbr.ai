@@ -38,7 +38,7 @@ var defaults = {
     envMapIntensity: 1.0,
     dispScale: 0.2, // 2.436143, // from original model
     dispBias: -0.09, // -0.428408,
-    normalScale: 1, // -0.7,
+    normalScale: -1, // -0.7,
 };
 
 var material = new THREE.MeshStandardMaterial();
@@ -77,19 +77,19 @@ function initGui() {
         material.roughness = value;
     } );
 
-    gui.add( settings, "normalScale" ).min( -4 ).max( 5 ).onChange( function( value ) {
+    gui.add( settings, "normalScale" ).min( -2 ).max( 2 ).onChange( function( value ) {
         material.normalScale.set( 1, -1 ).multiplyScalar( value );
     });
 
-    gui.add( settings, "envMapIntensity" ).min( 0 ).max( 10 ).onChange( function( value ) {
-        material.envMapIntensity = value;
-    } );
+    // gui.add( settings, "envMapIntensity" ).min( 0 ).max( 10 ).onChange( function( value ) {
+    //     material.envMapIntensity = value;
+    // } );
 
-    gui.add( settings, "dispScale" ).min( -3.0 ).max( 3.0 ).onChange( function( value ) {
+    gui.add( settings, "dispScale" ).min( -1.0 ).max( 1.0 ).onChange( function( value ) {
         material.displacementScale = value;
     } );
 
-    gui.add( settings, "dispBias" ).min( -3.0 ).max( 3.0 ).onChange( function( value ) {
+    gui.add( settings, "dispBias" ).min( -1.0 ).max( 1.0 ).onChange( function( value ) {
         material.displacementBias = value;
     } );
 
@@ -181,7 +181,7 @@ function init() {
         .setPath( './assets/webgl/geo/' )
         .load( 'plane_sub_div_40.geo', function ( group ) {
 
-            set_source_image("07");
+            set_source_image("37");
 
             material.map.wrapS = THREE.RepeatWrapping;
             material.roughnessMap.wrapS = THREE.RepeatWrapping;
