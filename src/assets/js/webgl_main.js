@@ -27,7 +27,7 @@ var settings = {
     envMapIntensity: 1.0,
     dispScale: 2.0, // 2.436143, // from original model
     dispBias: 0.5, // -0.428408,
-    normalScale: 1,
+    normalScale: -1,
 };
 
 var defaults = {
