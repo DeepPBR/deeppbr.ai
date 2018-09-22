@@ -55,7 +55,7 @@ div.results {
     }
 }
 
-#how .select-source.slick-slider {
+#demo .select-source.slick-slider {
 
   .slick-prev,
   .slick-next {
@@ -83,9 +83,10 @@ div.results {
     li {
       display: inline-flex;
       button {
-        background: #cccaca;
+        background: transparent;
         margin-left: 4px;
         margin-right: 4px;
+        border: 0;
         width: 35px;
       }
     }
@@ -95,12 +96,12 @@ div.results {
   
 }
 
-#how #webgl_container {
+#demo #webgl_container {
   max-width: 512px;
   margin:auto;
 }
 
-#how .results {
+#demo .results {
   .src_norms img,
   .src_disp img,
   .src_rough img,
@@ -109,8 +110,9 @@ div.results {
     max-width: 256px;
   }
 }
+
 @media(min-width: 768px) {
-  #how .results {
+  #demo .results {
     .src_base img {
       max-width: 512px;
       max-height: 512px;
