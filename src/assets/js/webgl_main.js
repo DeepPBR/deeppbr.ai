@@ -150,7 +150,269 @@ var defaults = {
         dispScale: 0.2, // 2.436143, // from original model
         dispBias: -0.09, // -0.428408,
         normalScale: 1, // -0.7,
+    },
+     "20" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "21" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "22" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "23" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "24" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "25" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "26" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "27" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "28" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "29" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "30" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "31" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "32" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "33" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "34" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "35" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "36" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "37" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "38" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "39" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "40" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "41" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "42" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "43" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "44" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
+    },
+     "45" : { 
+    metalness: 0, // 0.35
+        roughness: 1, // 0.8, 
+        lampIntensity: 0, 
+        aoMapIntensity: 1.0, 
+        envMapIntensity: 1.0,
+        dispScale: 0.2,
+        dispBias: -0.09, 
+        normalScale: 1, // -0.7,
     }
+
+
 }
 
 console.log(defaults["07"]);
