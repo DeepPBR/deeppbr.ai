@@ -70,26 +70,15 @@ div.results {
     }
   }
   .slick-list {
-
     width: 80%;
-    //height: 200px;
     .slick-slide img {
       margin:auto;
     }
   }
+
   ul.slick-dots {
-    width: 100%;
-    flex-flow: row nowrap;
-    li {
-      display: inline-flex;
-      button {
-        background: transparent;
-        margin-left: 4px;
-        margin-right: 4px;
-        border: 0;
-        width: 35px;
-      }
-    }
+    // hide on mobile
+    display: none;
   }
   // .slick-prev{ left: 0 }
   // .slick-next{ right: 0 }
@@ -111,7 +100,28 @@ div.results {
   }
 }
 
+
+
 @media(min-width: 768px) {
+  #demo .select-source.slick-slider {
+
+    ul.slick-dots {
+      display: block;
+      width: 100%;
+      flex-flow: row nowrap;
+      li {
+        display: inline-flex;
+        button {
+          background: transparent;
+          margin-left: 4px;
+          margin-right: 4px;
+          border: 0;
+          width: 35px;
+        }
+      }
+    }
+  }
+
   #demo .results {
     .src_base img {
       max-width: 512px;

@@ -352,6 +352,8 @@ module.exports = {
     const regex = /(\d\d)_base/;
 
     $(".select-source a").click(function(evt) {
+        console.log("here:" + evt);
+
         evt.preventDefault();
         var str = $(evt.target).attr("src") ? $(evt.target).attr("src") : $(evt.target).attr("data-lazy")
         console.log(str);
