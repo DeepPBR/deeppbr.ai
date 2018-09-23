@@ -80,14 +80,18 @@ div.results {
     // hide on mobile
     display: none;
   }
-  // .slick-prev{ left: 0 }
-  // .slick-next{ right: 0 }
   
 }
 
 #demo #webgl_container {
   max-width: 512px;
   margin:auto;
+
+  .dg.ac {
+    // hide on mobile
+    display: none;
+  }
+
 }
 
 #demo .results {
@@ -103,6 +107,13 @@ div.results {
 
 
 @media(min-width: 768px) {
+
+  #demo #webgl_container {
+    .dg.ac {
+      display: block
+    }
+  }
+
   #demo .select-source.slick-slider {
 
     ul.slick-dots {
