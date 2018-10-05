@@ -212,3 +212,11 @@ section {
     text-transform: none;
   }
 }
+
+
+.prefinery-form-cta {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
