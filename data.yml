@@ -1,6 +1,6 @@
 meta:
-  title: "Deep Physics Rendering"
-  description: "Deep Physics Rendering using Deep Learning to create normals, diffuse / delit and roughness maps."
+  title: "Deep PBR Physics Based Rendering"
+  description: "Deep Rendering using Deep Learning to create normals, diffuse / delit and roughness maps."
   facebook_image: ""  # /img/facebook.png
   twitter_image: ""  # /img/twitter.png
   image: ""  # /img/share.png

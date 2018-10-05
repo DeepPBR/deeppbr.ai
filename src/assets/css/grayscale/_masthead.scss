@@ -4,8 +4,8 @@
   height: auto;
   min-height: 35rem;
   padding: 15rem 0;
-  background: gray; // url('/assets/img/bg-masthead.jpg');
-
+  background: #999; // url('/assets/img/bg-masthead.jpg');
+  background: -webkit-linear-gradient(fade-out(#333, 0.1), fade-out(#555, .6));
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;

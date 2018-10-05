@@ -55,6 +55,8 @@ div.results {
     }
 }
 
+
+
 #demo .select-source.slick-slider {
 
   .slick-prev,
@@ -133,18 +135,80 @@ div.results {
     }
   }
 
-  #demo .results {
-    .src_base img {
-      max-width: 512px;
-      max-height: 512px;
+  #demo {
+
+    .info-box {
+      margin-top: -16px;
+      color:#ccc;
     }
 
-    .src_norms img,
-    .src_disp img,
-    .src_rough img,
-    .src_delit img{
-      max-width: 512px;
-      max-height: 512px;
+    .results {
+      .src_base img {
+        max-width: 512px;
+        max-height: 512px;
+      }
+
+      .src_norms img,
+      .src_disp img,
+      .src_rough img,
+      .src_delit img{
+        max-width: 256px;
+        max-height: 256px;
+      }
     }
+  }
+}
+
+
+#who {
+
+  // Styling for the team section
+  .team-member {
+    margin-bottom: 50px;
+    text-align: center;
+    img {
+      width: 225px;
+      height: 225px;
+      border: 7px solid $white;
+    }
+    h4 {
+      margin-top: 25px;
+      margin-bottom: 0;
+      text-transform: none;
+    }
+    p {
+      margin-top: 0;
+    }
+  }
+
+  .social-buttons li a {
+    font-size: 16px;
+    line-height: 32px;
+    display: block;
+    width: 32px;
+    height: 32px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    color: #fff;
+    border-radius: 100%;
+    outline: 0;
+    background-color: #212529;
+  }
+
+}
+
+section {
+
+  h2.section-heading {
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+
+  h3.section-subheading {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 75px;
+    text-transform: none;
   }
 }
