@@ -1,5 +1,6 @@
 meta:
   title: "DeepPBR Rendering"
+  description: "Deep Physically Based Rendering using Deep Learning to create normals, diffuse / delit and roughness maps."
   facebook_image: ""  # /img/facebook.png
   twitter_image: ""  # /img/twitter.png
   image: ""  # /img/share.png
