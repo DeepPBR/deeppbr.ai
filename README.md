@@ -3,7 +3,7 @@
 This is the public facing site for RealityVirtual project.
 
 Click here for the website:
-http://deeppbr.ai
+http://deeppbr.io
 
 
 Contained here are the gulp and such instructions for setting up this actual site.  
