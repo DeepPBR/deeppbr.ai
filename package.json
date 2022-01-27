@@ -27,7 +27,7 @@
     "popper.js": "^1.14.4",
     "slick-carousel": "^1.8.1",
     "tether": "^1.4.4",
-    "three": "^0.95.0",
+    "three": "^0.137.0",
     "three-text2d": "^0.4.1"
   },
   "devDependencies": {
